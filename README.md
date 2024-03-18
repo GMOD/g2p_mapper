@@ -1,6 +1,9 @@
 # g2p_mapper
 
-Provides a CLI tool [g2p_mapper_cli](packages/g2p_mapper_cli) and library
+This repo provides utilities for mapping genome coordinates to protein
+coordinates
+
+Provides a CLI tool [g2p_mapper_cli](packages/cli) and library
 [g2p_mapper](packages/g2p_mapper). See the respective README's for each use case
 
 ## Todos

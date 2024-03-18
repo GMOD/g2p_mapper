@@ -9,7 +9,6 @@ export interface Feat {
   subfeatures?: Feat[]
 }
 
-// see similar function in msaview plugin
 export function genomeToTranscriptSeqMapping(feature: Feat) {
   const strand = feature.strand
   const refName = feature.refName
