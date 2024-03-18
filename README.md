@@ -3,15 +3,11 @@
 Map positions on the genome to the protein and vice versa. Uses the "ID" field
 from the GFF column 9 to create a mapping
 
-## Usage
+## CLI usage
 
 ```bash
-git clone https://github.com/cmdcolin/g2p_mapper
-cd g2p_mapper
-yarn
-yarn build
-node dist/mapper.js yourfile.gff mappings.json
-
+npm install g2p_mapper_cli
+g2pmapper yourfile.gff mappings.json
 ```
 
 ## Output format
@@ -38,6 +34,27 @@ The JSON format looks like this
 the output file is fairly large, chr1 of human gff is 80 megabytes of JSON, but
 you can load that JSON file into memory, then select the transcript you want to
 get mappings for, and then use the g2p or p2g structures
+
+## Programmatic usage
+
+```js
+import { genomeToTranscriptMapping } from 'g2p_mapper'
+
+// pass in your feature, f, which is a "transcript" feature with the following
+// data format:
+// interface Feat {
+//   strand: number
+//   refName: string
+//   type: string
+//   phase: number
+//   ID: string
+//   score: number
+//   start: number
+//   end: number
+//   subfeatures?: Feat[]
+// }
+const { g2p, p2g, refName, strand } = genomeToTranscriptMapping(f)
+```
 
 ## Todos
 

@@ -1,0 +1,24 @@
+{
+  "name": "g2p_mapper_cli",
+  "bin": {
+    "g2pmapper": "dist/index.js"
+  },
+  "description": "Map genome to protein coordinates and back (CLI)",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@gmod/gff": "^1.3.0",
+    "g2p_mapper": "^1.0.0"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "preversion": "npm run build",
+    "postversion": "git push --follow-tags"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
