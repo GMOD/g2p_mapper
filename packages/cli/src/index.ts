@@ -11,8 +11,16 @@ import { featureData } from './parse'
 
 const ret = yargs(hideBin(process.argv))
   .options({
-    in: { type: 'string', demandOption: true },
-    out: { type: 'string', demandOption: true },
+    in: {
+      type: 'string',
+      demandOption: true,
+      description: 'input gff',
+    },
+    out: {
+      type: 'string',
+      demandOption: true,
+      description: "output directory, will be created if it doesn't exist",
+    },
   })
   .parseSync()
 
