@@ -1,11 +1,21 @@
+export interface Feat {
+  strand: number
+  refName: string
+  type: string
+  phase: number
+  ID: string
+  score: number
+  start: number
+  end: number
+  subfeatures?: Feat[]
+}
+
 // see similar function in msaview plugin
 export function genomeToTranscriptSeqMapping(feature: Feat) {
-  const strand = parseStrand(feature.strand)
-  const refName = feature.seq_id
+  const strand = feature.strand
+  const refName = feature.refName
   const cds =
-    feature.child_features
-      // @ts-expect-error
-      ?.map(f => f[0])
+    feature.subfeatures
       ?.filter(f => f.type === 'CDS')
       .sort((a, b) => strand * (a.start - b.start)) || []
   const g2p = {} as Record<number, number | undefined>
