@@ -3,8 +3,7 @@ export interface Feat {
   refName: string
   type: string
   phase: number
-  ID: string
-  score: number
+  id: string
   start: number
   end: number
   subfeatures?: Feat[]
@@ -17,7 +16,7 @@ export function genomeToTranscriptSeqMapping(feature: Feat) {
   const cds =
     feature.subfeatures
       ?.filter(f => f.type === 'CDS')
-      .sort((a, b) => strand * (a.start - b.start)) || []
+      .sort((a, b) => strand * (a.start - b.start)) ?? []
   const g2p = {} as Record<number, number | undefined>
   const p2g = {} as Record<number, number | undefined>
 

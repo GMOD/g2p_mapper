@@ -4,7 +4,7 @@
     "module": "commonjs",
     "skipLibCheck": true,
     "target":"es2018",
-    "types": ["node"],
+    "types": ["node","jest"],
     "lib": ["dom", "esnext"],
     "declaration": true,
     "moduleResolution": "node",
