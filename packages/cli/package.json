@@ -3,8 +3,12 @@
   "bin": {
     "g2pmapper": "dist/index.js"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "description": "Map genome to protein coordinates and back (CLI)",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "license": "MIT",
   "dependencies": {

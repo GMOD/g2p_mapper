@@ -60,7 +60,6 @@ export function featureData(data: GFF3FeatureLineWithRefs): Feat {
     strand: parseStrand(strand),
     refName: String(seq_id),
     phase: Number(phase),
-    score: Number(score),
     id: String(attrs.id),
     subfeatures: child_features.flatMap(c => c.map(c2 => featureData(c2))),
   }
