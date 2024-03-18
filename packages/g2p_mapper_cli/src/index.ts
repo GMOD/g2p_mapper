@@ -55,7 +55,7 @@ function processAttributes(dataAttributes: Record<string, unknown>) {
       b += '2'
     }
     if (dataAttributes[a] !== null) {
-      let attr = dataAttributes[a]
+      const attr = dataAttributes[a]
       res[b] = Array.isArray(attr) && attr.length === 1 ? attr[0] : attr
     }
   }
