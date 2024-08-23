@@ -41,7 +41,7 @@ function main({ inFile, outDir }: { inFile: string; outDir: string }) {
       }),
     )
     .on('data', (feat: GFF3FeatureLineWithRefs[]) => {
-      featureData(feat[0]).subfeatures?.map(f => {
+      featureData(feat[0]!).subfeatures?.map(f => {
         if (f.type === 'mRNA') {
           fs.writeFileSync(
             path.join(outDir, sanitize(`${f.id}.json`)),

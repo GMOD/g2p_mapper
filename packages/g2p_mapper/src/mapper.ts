@@ -16,8 +16,8 @@ export function genomeToTranscriptSeqMapping(feature: Feat) {
     feature.subfeatures
       ?.filter(f => f.type === 'CDS')
       .sort((a, b) => strand * (a.start - b.start)) ?? []
-  const g2p = {} as Record<number, number | undefined>
-  const p2g = {} as Record<number, number | undefined>
+  const g2p = {} as Record<number, number>
+  const p2g = {} as Record<number, number>
 
   let proteinCounter = 0
   if (strand !== -1) {

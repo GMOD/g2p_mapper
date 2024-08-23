@@ -8,6 +8,7 @@
     "lib": ["dom", "esnext"],
     "declaration": true,
     "moduleResolution": "node",
+    "noUncheckedIndexedAccess": true,
     "sourceMap": true,
     "strict": true,
     "noImplicitReturns": true,
