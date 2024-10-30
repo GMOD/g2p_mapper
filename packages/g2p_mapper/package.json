@@ -1,7 +1,7 @@
 {
   "name": "g2p_mapper",
   "description": "Map genome to protein coordinates and back",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "main": "dist/mapper.js",
   "files": [
