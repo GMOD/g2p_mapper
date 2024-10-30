@@ -18,8 +18,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "yargs": "^17.7.2"
   }
 }
