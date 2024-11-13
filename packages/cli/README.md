@@ -7,8 +7,10 @@ object
 ## CLI usage
 
 ```bash
-npm install g2p_mapper_cli
-export PATH=${PATH}:./node_modules/.bin/ ## May not be required for all installs
+## install the g2pmapper tool:
+npm install -g g2p_mapper_cli
+
+## invoke the tool
 g2pmapper --in yourfile.gff --out outDir
 
 ## will create outDir if none exists
