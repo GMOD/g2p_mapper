@@ -1,26 +1,35 @@
 {
-  "name": "root",
-  "private": true,
-  "workspaces": [
-    "packages/*"
+  "name": "g2p_mapper",
+  "description": "Map genome to protein coordinates and back",
+  "version": "1.0.4",
+  "license": "MIT",
+  "main": "dist/mapper.js",
+  "files": [
+    "src",
+    "dist"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "vitest",
     "lint": "eslint --report-unused-disable-directives --max-warnings 0",
-    "format": "prettier --write ."
+    "clean": "rimraf dist",
+    "format": "prettier --write .",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "preversion": "npm run build",
+    "postversion": "git push --follow-tags"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.28",
     "@typescript-eslint/eslint-plugin": "^8.2.0",
     "@typescript-eslint/parser": "^8.2.0",
     "eslint": "^9.9.0",
-    "jest": "^29.7.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.2.4",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0"
-  },
-  "version": "0.0.0"
+    "typescript-eslint": "^8.2.0",
+    "vitest": "^2.1.5"
+  }
 }

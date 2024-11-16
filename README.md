@@ -1,18 +1,31 @@
 # g2p_mapper
 
-This repo provides utilities for mapping genome coordinates to protein
-coordinates
+A library for mapping transcript/protein positions to the genome
 
-Provides a CLI tool [g2p_mapper_cli](packages/cli) and library
-[g2p_mapper](packages/g2p_mapper). See the respective README's for each use case
+## Usage
 
-## Todos
+Install the g2p_mapper library from npm, then
 
-Add testing and sanity checks
+```js
+import { genomeToTranscriptMapping } from 'g2p_mapper'
 
-## Footnote
+// pass in your feature, f, which is a "transcript" feature with the following
+// data format:
+// interface Feat {
+//   strand: number
+//   refName: string
+//   type: string
+//   phase: number
+//   ID: string
+//   score: number
+//   start: number
+//   end: number
+//   subfeatures?: Feat[]
+// }
+const { g2p, p2g, refName, strand } = genomeToTranscriptMapping(f)
+```
 
-Started from conversations at
-https://genomic.social/@photocyte/112100147276909277
+## Notes
 
-This code extracted from https://github.com/cmdcolin/jbrowse-plugin-protein3d
+See also https://github.com/cmdcolin/interproscan2genome and
+https://github.com/cmdcolin/g2p_mapper_cli for usages of this tool
