@@ -29,3 +29,6 @@ const { g2p, p2g, refName, strand } = genomeToTranscriptMapping(f)
 
 See also https://github.com/cmdcolin/interproscan2genome and
 https://github.com/cmdcolin/g2p_mapper_cli for usages of this tool
+
+This library is also used by the JBrowse plugins (protein3d, msaview) to map
+positions on the genome to protein sequences
