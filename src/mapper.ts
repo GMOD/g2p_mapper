@@ -12,10 +12,21 @@ export interface Feat {
 export function genomeToTranscriptSeqMapping(feature: Feat) {
   const strand = feature.strand
   const refName = feature.refName
-  const cds =
-    feature.subfeatures
-      ?.filter(f => f.type === 'CDS')
-      .sort((a, b) => strand * (a.start - b.start)) ?? []
+
+  // Filter CDS features and deduplicate based on start/end positions
+  // (GFF3 files can contain duplicate CDS features)
+  const cdsFeatures = feature.subfeatures?.filter(f => f.type === 'CDS') ?? []
+  const uniqueCdsMap = new Map<string, Feat>()
+  for (const f of cdsFeatures) {
+    const key = `${f.start}-${f.end}`
+    if (!uniqueCdsMap.has(key)) {
+      uniqueCdsMap.set(key, f)
+    }
+  }
+  const cds = Array.from(uniqueCdsMap.values()).sort(
+    (a, b) => strand * (a.start - b.start),
+  )
+
   const g2p = {} as Record<number, number>
   const p2g = {} as Record<number, number>
 
@@ -31,8 +42,10 @@ export function genomeToTranscriptSeqMapping(feature: Feat) {
       }
     }
   } else {
+    // For reverse strand, iterate from end-1 down to start (inclusive)
+    // to properly handle 0-based half-open intervals [start, end)
     for (const f of cds) {
-      for (let genomePos = f.end; genomePos > f.start; genomePos--) {
+      for (let genomePos = f.end - 1; genomePos >= f.start; genomePos--) {
         const proteinPos = Math.floor(proteinCounter++ / 3)
         g2p[genomePos] = proteinPos
         if (!p2g[proteinPos]) {
