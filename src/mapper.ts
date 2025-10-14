@@ -45,7 +45,7 @@ export function genomeToTranscriptSeqMapping(feature: Feat) {
     // For reverse strand, iterate from end-1 down to start (inclusive)
     // to properly handle 0-based half-open intervals [start, end)
     for (const f of cds) {
-      for (let genomePos = f.end - 1; genomePos >= f.start; genomePos--) {
+      for (let genomePos = f.end; genomePos >= f.start; genomePos--) {
         const proteinPos = Math.floor(proteinCounter++ / 3)
         g2p[genomePos] = proteinPos
         if (!p2g[proteinPos]) {
