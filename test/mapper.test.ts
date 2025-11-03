@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { genomeToTranscriptSeqMapping } from './mapper'
+import { genomeToTranscriptSeqMapping } from '../src/mapper'
 
 test('basic', () => {
   const ret = genomeToTranscriptSeqMapping({

@@ -8,7 +8,7 @@ export default tseslint.config(
   {
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.json'],
+        project: ['./tsconfig.lint.json'],
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -39,6 +39,7 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 0,
       '@typescript-eslint/explicit-module-boundary-types': 0,
       '@typescript-eslint/ban-ts-comment': 0,
+      '@typescript-eslint/restrict-template-expressions': 0,
       semi: ['error', 'never'],
     },
   },
