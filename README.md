@@ -13,7 +13,8 @@ npm install g2p_mapper
 
 ## Usage
 
-Pass a transcript feature (with CDS subfeatures) to `genomeToTranscriptSeqMapping`:
+Pass a transcript feature (with CDS subfeatures) to
+`genomeToTranscriptSeqMapping`:
 
 ```typescript
 import { genomeToTranscriptSeqMapping } from 'g2p_mapper'
