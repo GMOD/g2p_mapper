@@ -37,6 +37,7 @@ export default defineConfig(
       ],
       'no-underscore-dangle': 0,
       curly: 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-non-null-assertion': 0,
       '@typescript-eslint/no-explicit-any': 0,
       '@typescript-eslint/explicit-module-boundary-types': 0,
