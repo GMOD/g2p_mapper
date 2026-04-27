@@ -1,7 +1,7 @@
 {
   "name": "g2p_mapper",
   "description": "Map genome to protein coordinates and back",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/GMOD/g2p_mapper.git"
