@@ -58,3 +58,11 @@ const range = getCodonRange(p2g, proteinPos, strand)
 
 This library is also used by JBrowse plugins (protein3d, msaview) to map
 positions on the genome to protein sequences.
+
+## Publishing
+
+[Trusted publishing](https://docs.npmjs.com/about-trusted-publishing) via GitHub Actions.
+
+```bash
+npm version patch  # or minor/major
+```
