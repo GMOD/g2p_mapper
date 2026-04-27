@@ -55,9 +55,10 @@ const range = getCodonRange(p2g, proteinPos, strand)
 - https://github.com/cmdcolin/g2p_mapper_cli — CLI wrapper for this library
 - https://github.com/cmdcolin/interproscan2genome — maps InterProScan protein
   annotations back to genome coordinates
-
-This library is also used by JBrowse plugins (protein3d, msaview) to map
-positions on the genome to protein sequences.
+- https://github.com/cmdcolin/jbrowse-plugin-protein3d - our plugin for mapping
+  3-D protein structure positions to the genome
+- https://github.com/GMOD/jbrowse-plugin-msaview - our plugin for mapping MSA
+  sequence positions to the genome
 
 ## Publishing
 
@@ -67,3 +68,10 @@ Actions.
 ```bash
 npm version patch  # or minor/major
 ```
+
+## Footnote
+
+This package makes various assumptions about the biology, specifically simple
+3-letter codon translation. This assumption may not be valid in all
+circumstances (biology breaks the rules constantly). Make sure to validate these
+assumptions for your application
