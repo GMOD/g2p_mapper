@@ -1,11 +1,10 @@
 export interface Feat {
-  strand: number
   refName: string
-  type: string
-  phase: number
-  id: string
   start: number
   end: number
+  type?: string
+  strand?: number
+  phase?: number
   subfeatures?: Feat[]
 }
 
