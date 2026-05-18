@@ -1,5 +1,9 @@
 import { test, expect } from 'vitest'
-import { genomeToTranscriptSeqMapping, getCodonRange } from '../src/index.ts'
+import {
+  genomeToTranscriptSeqMapping,
+  getCodonRange,
+  getCodonRanges,
+} from '../src/index.ts'
 
 const codonTable: Record<string, string> = {
   TTT: 'F',
@@ -404,6 +408,147 @@ test('getCodonRange for forward strand', () => {
   expect(range2).toBeUndefined()
 })
 
+test('returns empty maps when feature has no subfeatures', () => {
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 100,
+    strand: 1,
+  })
+  expect(ret.g2p).toEqual({})
+  expect(ret.p2g).toEqual({})
+  expect(ret.refName).toBe('chr1')
+  expect(ret.strand).toBe(1)
+})
+
+test('returns empty maps when subfeatures contain no CDS', () => {
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 100,
+    strand: 1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 100, type: 'exon', strand: 1 },
+    ],
+  })
+  expect(ret.g2p).toEqual({})
+  expect(ret.p2g).toEqual({})
+})
+
+test('throws on invalid strand', () => {
+  expect(() =>
+    genomeToTranscriptSeqMapping({
+      refName: 'chr1',
+      start: 0,
+      end: 10,
+      strand: 0,
+    }),
+  ).toThrow(/Invalid strand/)
+  expect(() =>
+    genomeToTranscriptSeqMapping({ refName: 'chr1', start: 0, end: 10 }),
+  ).toThrow(/Invalid strand/)
+})
+
+test('throws on missing refName', () => {
+  expect(() =>
+    genomeToTranscriptSeqMapping({
+      refName: '',
+      start: 0,
+      end: 10,
+      strand: 1,
+    }),
+  ).toThrow(/refName is required/)
+})
+
+test('forward strand multi-exon CDS skips intronic positions', () => {
+  // CDS in two segments: [0,3) and [10,13). Each codon stays within one exon.
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 13,
+    strand: 1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 3, type: 'CDS', strand: 1, phase: 0 },
+      {
+        refName: 'chr1',
+        start: 10,
+        end: 13,
+        type: 'CDS',
+        strand: 1,
+        phase: 0,
+      },
+    ],
+  })
+  expect(ret.g2p[0]).toBe(0)
+  expect(ret.g2p[2]).toBe(0)
+  expect(ret.g2p[10]).toBe(1)
+  expect(ret.g2p[12]).toBe(1)
+  expect(ret.p2g[0]).toBe(0)
+  expect(ret.p2g[1]).toBe(10)
+  expect(ret.g2p[5]).toBeUndefined()
+})
+
+test('forward strand with phase=1 on first CDS shifts protein positions', () => {
+  // Phase=1: first base of CDS is the last base of a codon begun upstream.
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 7,
+    strand: 1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand: 1, phase: 1 },
+    ],
+  })
+  expect(ret.g2p[0]).toBe(0)
+  expect(ret.g2p[1]).toBe(1)
+  expect(ret.g2p[3]).toBe(1)
+  expect(ret.g2p[4]).toBe(2)
+  expect(ret.p2g[0]).toBe(0)
+  expect(ret.p2g[1]).toBe(1)
+  expect(ret.p2g[2]).toBe(4)
+})
+
+test('CDS with start >= end is filtered out', () => {
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 10,
+    strand: 1,
+    subfeatures: [
+      { refName: 'chr1', start: 5, end: 5, type: 'CDS', strand: 1, phase: 0 },
+      { refName: 'chr1', start: 7, end: 3, type: 'CDS', strand: 1, phase: 0 },
+      { refName: 'chr1', start: 0, end: 3, type: 'CDS', strand: 1, phase: 0 },
+    ],
+  })
+  expect(Object.keys(ret.g2p)).toEqual(['0', '1', '2'])
+})
+
+test('g2p and p2g are consistent: p2g[g2p[pos]] maps to a position with that protein value', () => {
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 100,
+    end: 200,
+    strand: 1,
+    subfeatures: [
+      {
+        refName: 'chr1',
+        start: 100,
+        end: 200,
+        type: 'CDS',
+        strand: 1,
+        phase: 0,
+      },
+    ],
+  })
+  for (const [posStr, protein] of Object.entries(ret.g2p)) {
+    const start = ret.p2g[protein]
+    expect(start).toBeDefined()
+    expect(ret.g2p[start!]).toBe(protein)
+    expect(Number(posStr)).toBeGreaterThanOrEqual(start!)
+    expect(Number(posStr)).toBeLessThan(start! + 3)
+  }
+})
+
 test('getCodonRange for reverse strand', () => {
   // For reverse strand gene at positions 0-5
   // Transcription order: 5, 4, 3, 2, 1, 0
@@ -447,4 +592,124 @@ test('getCodonRange for reverse strand', () => {
   // Non-existent protein position should return undefined
   const range2 = getCodonRange(ret.p2g, 99, ret.strand)
   expect(range2).toBeUndefined()
+})
+
+test('translation round-trip via p2gCodon matches direct translation across exon boundary', () => {
+  // Multi-exon forward strand transcript: ATG|GCT|TGG split across two CDS
+  // segments with an intron in between. Codon 1 (GCT) spans the boundary.
+  //
+  //   CDS segments:  [0, 4) and [10, 15)
+  //   mRNA:          A T G G  C T T G G   -> ATG GCT TGG -> M A W
+  const genomicSeq: Record<number, string> = {}
+  for (const [i, ch] of 'ATGG'.split('').entries()) {
+    genomicSeq[i] = ch
+  }
+  for (const [i, ch] of 'CTTGG'.split('').entries()) {
+    genomicSeq[10 + i] = ch
+  }
+
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 15,
+    strand: 1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 4, type: 'CDS', strand: 1, phase: 0 },
+      {
+        refName: 'chr1',
+        start: 10,
+        end: 15,
+        type: 'CDS',
+        strand: 1,
+        phase: 0,
+      },
+    ],
+  })
+
+  const proteinPositions = Object.keys(ret.p2gCodon)
+    .map(Number)
+    .sort((a, b) => a - b)
+  const protein = proteinPositions
+    .map(pp => {
+      const codon = ret.p2gCodon[pp]!.map(g => genomicSeq[g]).join('')
+      return codonTable[codon] ?? 'X'
+    })
+    .join('')
+
+  expect(protein).toBe('MAW')
+  expect(translate('ATGGCTTGG')).toBe('MAW')
+
+  // p2gCodon for codon 1 (A) spans the intron: [3, 10, 11]
+  expect(ret.p2gCodon[1]).toEqual([3, 10, 11])
+
+  // getCodonRange (single-range API) gives a wrong range that includes
+  // intronic positions — documented limitation.
+  expect(getCodonRange(ret.p2g, 1, ret.strand)).toEqual([3, 6])
+
+  // getCodonRanges correctly returns two contiguous runs.
+  expect(getCodonRanges(ret.p2gCodon, 1)).toEqual([
+    [3, 4],
+    [10, 12],
+  ])
+})
+
+test('getCodonRanges for forward strand single exon', () => {
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 6,
+    strand: 1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 6, type: 'CDS', strand: 1, phase: 0 },
+    ],
+  })
+  expect(getCodonRanges(ret.p2gCodon, 0)).toEqual([[0, 3]])
+  expect(getCodonRanges(ret.p2gCodon, 1)).toEqual([[3, 6]])
+  expect(getCodonRanges(ret.p2gCodon, 99)).toBeUndefined()
+})
+
+test('getCodonRanges for reverse strand single exon', () => {
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 6,
+    strand: -1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 6, type: 'CDS', strand: -1, phase: 0 },
+    ],
+  })
+  // Genomic positions for codon 0 (transcription order): [5, 4, 3]
+  // Ascending: [3, 4, 5] -> merged: [3, 6)
+  expect(getCodonRanges(ret.p2gCodon, 0)).toEqual([[3, 6]])
+  expect(getCodonRanges(ret.p2gCodon, 1)).toEqual([[0, 3]])
+})
+
+test('getCodonRanges for reverse strand spanning exon boundary', () => {
+  // Reverse strand transcript: CDS [0,2) and [10,14). Transcription order
+  // (high -> low): 13, 12, 11, 10, 1, 0. Codon 0 = [13,12,11] -> [11,14).
+  // Codon 1 = [10, 1, 0] -> split into [0,2) and [10,11).
+  const ret = genomeToTranscriptSeqMapping({
+    refName: 'chr1',
+    start: 0,
+    end: 14,
+    strand: -1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 2, type: 'CDS', strand: -1, phase: 0 },
+      {
+        refName: 'chr1',
+        start: 10,
+        end: 14,
+        type: 'CDS',
+        strand: -1,
+        phase: 0,
+      },
+    ],
+  })
+  expect(ret.p2gCodon[0]).toEqual([13, 12, 11])
+  expect(ret.p2gCodon[1]).toEqual([10, 1, 0])
+  expect(getCodonRanges(ret.p2gCodon, 0)).toEqual([[11, 14]])
+  expect(getCodonRanges(ret.p2gCodon, 1)).toEqual([
+    [0, 2],
+    [10, 11],
+  ])
 })
