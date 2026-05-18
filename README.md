@@ -45,29 +45,53 @@ interface Feat {
 }
 ```
 
-Use `getCodonRange` to get the genomic coordinate range for a codon at a given
-protein position:
+All coordinates are 0-based and half-open (`[start, end)`).
+
+### Worked example
 
 ```typescript
-import { getCodonRange } from 'g2p_mapper'
-
-// returns a 0-based half-open [start, end) interval, or undefined
-const range = getCodonRange(p2g, proteinPos, strand)
+const ret = genomeToTranscriptSeqMapping({
+  refName: 'chr1',
+  start: 0,
+  end: 6,
+  strand: 1,
+  subfeatures: [
+    { refName: 'chr1', start: 0, end: 6, type: 'CDS', strand: 1, phase: 0 },
+  ],
+})
+// ret.g2p      => { 0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 1 }
+// ret.p2g      => { 0: 0, 1: 3 }                // first genome pos per codon
+// ret.p2gCodon => { 0: [0, 1, 2], 1: [3, 4, 5] } // all positions, transcription order
 ```
 
-`getCodonRange` assumes the codon's three bases are contiguous in genome
-coordinates. Codons that span an exon boundary, or split codons at the start of
-a CDS (`phase != 0`), will produce a range that includes intronic or out-of-CDS
-positions. Use `getCodonRanges` with `p2gCodon` to get the correct set of ranges
-in those cases:
+For reverse-strand features, `p2gCodon` lists positions in transcription order
+(descending genomic coordinates). On a reverse-strand CDS `[0, 6)` the same
+codons become `{ 0: [5, 4, 3], 1: [2, 1, 0] }`.
+
+### Looking up codon ranges
+
+`getCodonRanges` returns the genomic ranges covering a codon. It correctly
+handles codons that span an exon boundary by returning multiple ranges.
 
 ```typescript
 import { getCodonRanges } from 'g2p_mapper'
 
-// returns an array of 0-based half-open [start, end) intervals, sorted
-// ascending, or undefined. Multiple ranges are returned when the codon spans
-// an exon boundary.
+// Returns [start, end)[] sorted ascending, or undefined if the protein
+// position is unknown.
 const ranges = getCodonRanges(p2gCodon, proteinPos)
+```
+
+`getCodonRange` is a faster single-range alternative kept for backwards
+compatibility. It assumes the codon's three bases are contiguous in genome
+coordinates, so it returns wrong ranges for codons that span an exon boundary or
+for split codons at a phase-shifted CDS start (`phase != 0`). Prefer
+`getCodonRanges` for new code.
+
+```typescript
+import { getCodonRange } from 'g2p_mapper'
+
+// Returns a single [start, end) interval, or undefined.
+const range = getCodonRange(p2g, proteinPos, strand)
 ```
 
 ## See also
@@ -80,6 +104,13 @@ const ranges = getCodonRanges(p2gCodon, proteinPos)
 - https://github.com/GMOD/jbrowse-plugin-msaview - our plugin for mapping MSA
   sequence positions to the genome
 
+## Footnote
+
+This package makes various assumptions about the biology, specifically simple
+3-letter codon translation. This assumption may not be valid in all
+circumstances (biology breaks the rules constantly). Make sure to validate these
+assumptions for your application
+
 ## Publishing
 
 [Trusted publishing](https://docs.npmjs.com/about-trusted-publishing) via GitHub
@@ -88,10 +119,3 @@ Actions.
 ```bash
 npm version patch  # or minor/major
 ```
-
-## Footnote
-
-This package makes various assumptions about the biology, specifically simple
-3-letter codon translation. This assumption may not be valid in all
-circumstances (biology breaks the rules constantly). Make sure to validate these
-assumptions for your application
