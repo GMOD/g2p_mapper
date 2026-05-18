@@ -117,5 +117,5 @@ assumptions for your application
 Actions.
 
 ```bash
-npm version patch  # or minor/major
+pnpm version patch  # or minor/major
 ```
