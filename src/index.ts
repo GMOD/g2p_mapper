@@ -2,6 +2,8 @@ export interface Feat {
   refName: string
   start: number
   end: number
+  id?: string
+  name?: string
   type?: string
   strand?: number
   phase?: number
