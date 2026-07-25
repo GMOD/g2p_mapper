@@ -2,12 +2,14 @@
   "name": "g2p_mapper",
   "description": "Map genome to protein coordinates and back",
   "version": "2.1.5",
+  "packageManager": "pnpm@11.15.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/GMOD/g2p_mapper.git"
   },
   "license": "MIT",
   "type": "module",
+  "sideEffects": false,
   "main": "dist/index.js",
   "exports": {
     "import": "./esm/index.js",
