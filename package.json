@@ -5,7 +5,7 @@
   "packageManager": "pnpm@11.15.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GMOD/g2p_mapper.git"
+    "url": "git+https://github.com/GMOD/g2p_mapper.git"
   },
   "license": "MIT",
   "type": "module",
