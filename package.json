@@ -1,7 +1,7 @@
 {
   "name": "g2p_mapper",
   "description": "Map genome to protein coordinates and back",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "packageManager": "pnpm@11.15.1",
   "repository": {
     "type": "git",
