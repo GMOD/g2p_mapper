@@ -4,3 +4,5 @@ node_modules
 *.gff
 data
 esm
+.claude/settings.local.json
+.claude/worktrees/
