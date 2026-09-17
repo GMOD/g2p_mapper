@@ -106,10 +106,9 @@ const range = getCodonRange(p2g, proteinPos, strand)
 
 ## Footnote
 
-This package makes various assumptions about the biology, specifically simple
-3-letter codon translation. This assumption may not be valid in all
-circumstances (biology breaks the rules constantly). Make sure to validate these
-assumptions for your application
+`g2p_mapper` assumes simple 3-letter codon translation, which does not always
+hold (biology breaks the rules constantly). Validate this assumption against
+your own data.
 
 ## Publishing
 
