@@ -55,7 +55,32 @@ const feature = {
   becomes `start - 1` and `end` stays the same
 
 `g2p_mapper` does not parse GFF3. Build the object from your parser's output; a
-JBrowse 2 feature's `feature.toJSON()` already has this shape.
+JBrowse 2 feature's `feature.toJSON()` already has this shape, and so do the
+features from [@gmod/gff-nostream](https://github.com/GMOD/gff-nostream).
+
+### With @gmod/gff-nostream
+
+`@gmod/gff-nostream` returns features with 0-based coordinates, numeric strand
+and nested `subfeatures`, so its transcripts go to the mapper unchanged. The
+mapper wants the transcript, not the gene above it:
+
+```typescript
+import { parseStringSync } from '@gmod/gff-nostream'
+import { genomeToTranscriptSeqMapping } from 'g2p_mapper'
+
+const gff = `chr1\t.\tgene\t100\t205\t.\t+\t.\tID=gene1
+chr1\t.\tmRNA\t100\t205\t.\t+\t.\tID=tx1;Parent=gene1
+chr1\t.\tCDS\t100\t103\t.\t+\t0\tParent=tx1
+chr1\t.\tCDS\t201\t205\t.\t+\t2\tParent=tx1
+`
+
+for (const gene of parseStringSync(gff)) {
+  for (const transcript of gene.subfeatures) {
+    const { g2p, p2gCodon } = genomeToTranscriptSeqMapping(transcript)
+    g2p[200] // 1
+  }
+}
+```
 
 ### Mapping positions
 
