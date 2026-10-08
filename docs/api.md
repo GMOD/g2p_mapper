@@ -23,7 +23,7 @@ interface Feat {
   refName: string // chromosome/contig name (required)
   start: number // 0-based (required)
   end: number // 0-based, half-open (required)
-  type?: string // e.g. 'mRNA'; CDS children must have type === 'CDS'
+  type?: string | null // e.g. 'mRNA'; CDS children must have type === 'CDS'
   strand?: number // 1 (forward) or -1 (reverse); required on the parent
   phase?: number // CDS phase (0, 1, or 2); only the first CDS's phase is consulted
   subfeatures?: Feat[] // should contain CDS children

@@ -4,7 +4,7 @@ export interface Feat {
   end: number
   id?: string
   name?: string
-  type?: string
+  type?: string | null
   strand?: number
   phase?: number
   subfeatures?: Feat[]
