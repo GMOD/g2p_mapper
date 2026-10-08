@@ -1,0 +1,38 @@
+digraph mapping {
+  rankdir = TB
+  bgcolor = "white"
+  nodesep = 0.4
+  ranksep = 0.45
+
+  node [
+    fontname = "Helvetica,Arial,sans-serif"
+    fontsize = 11
+    fontcolor = "#1f2328"
+    color = "#8c959f"
+    style = "filled"
+    fillcolor = "#f6f8fa"
+    shape = box
+    margin = "0.18,0.10"
+  ]
+  edge [
+    fontname = "Helvetica,Arial,sans-serif"
+    fontsize = 9
+    fontcolor = "#57606a"
+    color = "#8c959f"
+    arrowsize = 0.7
+  ]
+
+  feat [label = "transcript Feat\nstrand, refName, subfeatures", fillcolor = "#ddf4ff"]
+  check [label = "validate\nstrand is 1 or -1, refName set\n(otherwise throw)"]
+  dedupe [label = "keep CDS subfeatures\ndrop empty ones, dedupe on start-end\n(first wins)"]
+  sort [label = "sort in transcription order\nascending on +, descending on -"]
+  counter [label = "start the base counter\n(3 - first CDS phase) % 3"]
+  walk [label = "walk each CDS base in transcription order\nprotein pos = floor(counter++ / 3)"]
+  out [label = "g2p · p2g · p2gCodon", fillcolor = "#dafbe1"]
+  ranges [label = "getCodonRanges(p2gCodon, pos)\nmerge adjacent bases into [start, end) ranges", fillcolor = "#dafbe1"]
+  range [label = "getCodonRange(p2g, pos, strand)\nassumes 3 contiguous bases", fillcolor = "#fff8c5"]
+
+  feat -> check -> dedupe -> sort -> counter -> walk -> out
+  out -> ranges [label = "p2gCodon"]
+  out -> range [label = "p2g\n(legacy)", style = dashed]
+}
