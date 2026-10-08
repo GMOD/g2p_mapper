@@ -17,13 +17,62 @@ npm install g2p_mapper
 
 ## Usage
 
+### The input feature
+
+`genomeToTranscriptSeqMapping` takes one transcript (an mRNA, say) as a plain
+object, with its CDS segments in `subfeatures`. Take this two-exon transcript in
+GFF3:
+
+```
+chr1  .  mRNA  100  205  .  +  .  ID=tx1
+chr1  .  CDS   100  103  .  +  0  Parent=tx1
+chr1  .  CDS   201  205  .  +  2  Parent=tx1
+```
+
+The equivalent feature object:
+
+```typescript
+const feature = {
+  refName: 'chr1',
+  start: 99,
+  end: 205,
+  strand: 1,
+  type: 'mRNA',
+  subfeatures: [
+    { refName: 'chr1', start: 99, end: 103, type: 'CDS', phase: 0 },
+    { refName: 'chr1', start: 200, end: 205, type: 'CDS', phase: 2 },
+  ],
+}
+```
+
+- `refName`, `start` and `end` are required on every feature
+- `strand` is required on the transcript, and is `1` or `-1`, not `+` or `-`
+- Only subfeatures with `type: 'CDS'` count; exons, UTRs and the rest are
+  ignored, and the CDS can be in any order
+- `phase` is the GFF3 phase column; the mapper reads it from the first CDS in
+  transcription order only
+- Coordinates are 0-based and half-open, so a GFF3 `start` (1-based, inclusive)
+  becomes `start - 1` and `end` stays the same
+
+`g2p_mapper` does not parse GFF3. Build the object from your parser's output; a
+JBrowse 2 feature's `feature.toJSON()` already has this shape.
+
+### Mapping positions
+
 ```typescript
 import { genomeToTranscriptSeqMapping, getCodonRanges } from 'g2p_mapper'
 
 const { g2p, p2g, p2gCodon, refName, strand } =
   genomeToTranscriptSeqMapping(feature)
 
-const ranges = getCodonRanges(p2gCodon, proteinPos)
+g2p[200] // 1: genome position 200 falls in the second amino acid
+g2p[150] // undefined: 150 is intronic
+
+p2g[1] // 102
+p2gCodon[1] // [102, 200, 201]: this codon spans the intron
+
+getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]
+getCodonRanges(p2gCodon, 2) // [[202, 205]]
 ```
 
 - `g2p` — genome position → protein position
@@ -31,9 +80,9 @@ const ranges = getCodonRanges(p2gCodon, proteinPos)
 - `p2gCodon` — protein position → every genome position of the codon, in
   transcription order
 - `getCodonRanges` — a codon's genomic `[start, end)` ranges, one per contiguous
-  piece
+  piece, or `undefined` for a protein position outside the CDS
 
-All coordinates are 0-based and half-open.
+Protein positions are 0-based too: `0` is the first amino acid.
 
 ## Docs
 
