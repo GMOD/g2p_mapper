@@ -109,6 +109,31 @@ getCodonRanges(p2gCodon, 2) // [[202, 205]]
 
 Protein positions are 0-based too: `0` is the first amino acid.
 
+### Reverse strand
+
+With `strand: -1` the mapper walks the CDS from the highest coordinate down, so
+the first amino acid sits at the right-hand end. The same transcript on the
+reverse strand has different phases, because the right-hand CDS now comes first:
+
+```typescript
+const { g2p, p2g, p2gCodon } = genomeToTranscriptSeqMapping({
+  ...feature,
+  strand: -1,
+  subfeatures: [
+    { refName: 'chr1', start: 99, end: 103, type: 'CDS', phase: 1 },
+    { refName: 'chr1', start: 200, end: 205, type: 'CDS', phase: 0 },
+  ],
+})
+
+g2p[204] // 0: the highest CDS base starts the protein
+g2p[99] // 2
+
+p2g[1] // 201: the codon's first base, which is its highest coordinate
+p2gCodon[1] // [201, 200, 102]: transcription order, so descending
+
+getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]: always ascending
+```
+
 ## Docs
 
 - [mapping.md](docs/mapping.md) — how the maps are built, with a flowchart, and

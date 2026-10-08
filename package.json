@@ -52,7 +52,14 @@
     "vitest": "^4.1.10"
   },
   "keywords": [
-    "bioinformatics"
+    "bioinformatics",
+    "genomics",
+    "gff3",
+    "cds",
+    "codon",
+    "protein",
+    "genome",
+    "coordinates"
   ],
   "author": {
     "name": "Colin Diesh",

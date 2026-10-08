@@ -30,6 +30,10 @@ interface Feat {
 }
 ```
 
+The function reads only the direct `subfeatures` of the feature you pass. A gene
+whose CDS sit under its mRNA children has no direct CDS, so passing the gene
+returns empty maps without an error; pass each transcript instead.
+
 **Output.**
 
 | Field      | Type                       | Meaning                                                                       |

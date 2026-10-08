@@ -713,3 +713,72 @@ test('getCodonRanges for reverse strand spanning exon boundary', () => {
     [10, 11],
   ])
 })
+
+function readmeTranscript(strand: 1 | -1) {
+  return {
+    refName: 'chr1',
+    start: 99,
+    end: 205,
+    strand,
+    type: 'mRNA',
+    subfeatures: [
+      {
+        refName: 'chr1',
+        start: 99,
+        end: 103,
+        type: 'CDS',
+        phase: strand === 1 ? 0 : 1,
+      },
+      {
+        refName: 'chr1',
+        start: 200,
+        end: 205,
+        type: 'CDS',
+        phase: strand === 1 ? 2 : 0,
+      },
+    ],
+  }
+}
+
+test('README forward strand example', () => {
+  const { g2p, p2g, p2gCodon } = genomeToTranscriptSeqMapping(
+    readmeTranscript(1),
+  )
+  expect(g2p[200]).toBe(1)
+  expect(g2p[150]).toBeUndefined()
+  expect(p2g[1]).toBe(102)
+  expect(p2gCodon[1]).toEqual([102, 200, 201])
+  expect(getCodonRanges(p2gCodon, 1)).toEqual([
+    [102, 103],
+    [200, 202],
+  ])
+  expect(getCodonRanges(p2gCodon, 2)).toEqual([[202, 205]])
+})
+
+test('README reverse strand example', () => {
+  const { g2p, p2g, p2gCodon } = genomeToTranscriptSeqMapping(
+    readmeTranscript(-1),
+  )
+  expect(g2p[204]).toBe(0)
+  expect(g2p[99]).toBe(2)
+  expect(p2g[1]).toBe(201)
+  expect(p2gCodon[1]).toEqual([201, 200, 102])
+  expect(getCodonRanges(p2gCodon, 1)).toEqual([
+    [102, 103],
+    [200, 202],
+  ])
+})
+
+test('a gene has no direct CDS children, so its maps are empty', () => {
+  const transcript = readmeTranscript(1)
+  const gene = {
+    refName: 'chr1',
+    start: 99,
+    end: 205,
+    strand: 1,
+    type: 'gene',
+    subfeatures: [transcript],
+  }
+  expect(genomeToTranscriptSeqMapping(gene).g2p).toEqual({})
+  expect(genomeToTranscriptSeqMapping(transcript).g2p[200]).toBe(1)
+})
