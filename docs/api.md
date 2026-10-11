@@ -16,19 +16,19 @@ const { g2p, p2g, p2gCodon, refName, strand } =
   genomeToTranscriptSeqMapping(feature)
 ```
 
-**Input.** A transcript with CDS children:
+**Input.** A transcript with CDS children, of the exported type `Feat`:
 
-```typescript
-interface Feat {
-  refName: string // chromosome/contig name (required)
-  start: number // 0-based (required)
-  end: number // 0-based, half-open (required)
-  type?: string | null // e.g. 'mRNA'; CDS children must have type === 'CDS'
-  strand?: number // 1 (forward) or -1 (reverse); required on the parent
-  phase?: number // CDS phase (0, 1, or 2); only the first CDS's phase is consulted
-  subfeatures?: Feat[] // should contain CDS children
-}
-```
+| Field         | Type             | Meaning                                                       |
+| ------------- | ---------------- | ------------------------------------------------------------- |
+| `refName`     | `string`         | chromosome/contig name; required on the parent                |
+| `start`       | `number`         | 0-based start; required                                       |
+| `end`         | `number`         | 0-based end, exclusive; required                              |
+| `id`          | `string`         | optional; the mapper does not read it                         |
+| `name`        | `string`         | optional; the mapper does not read it                         |
+| `type`        | `string \| null` | optional, e.g. `'mRNA'`; CDS children need `'CDS'`            |
+| `strand`      | `number`         | `1` (forward) or `-1` (reverse); required on the parent       |
+| `phase`       | `number`         | optional CDS phase (0, 1, or 2), read from the first CDS only |
+| `subfeatures` | `Feat[]`         | optional; should contain the CDS children                     |
 
 The function reads only the direct `subfeatures` of the feature you pass. A gene
 whose CDS sit under its mRNA children has no direct CDS, so passing the gene
