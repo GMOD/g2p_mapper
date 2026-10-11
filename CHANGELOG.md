@@ -1,3 +1,9 @@
+## [2.2.1](https://github.com/GMOD/g2p_mapper/compare/v2.2.0...v2.2.1) (2026-10-11)
+
+### Tests
+
+- Fail when docs/api.md misses a public member or export ([14e4736](https://github.com/GMOD/g2p_mapper/commit/14e47366c60b2f88a5f6821afae8255dae1eec1c))
+
 ## [2.2.0](https://github.com/GMOD/g2p_mapper/compare/v2.1.7...v2.2.0) (2026-10-08)
 
 ### Chores
