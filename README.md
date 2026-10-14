@@ -55,9 +55,8 @@ const feature = {
   becomes `start - 1` and `end` stays the same
 
 `g2p_mapper` takes a parsed feature, so build the object from your GFF3 parser's
-output. A JBrowse 2 feature's `feature.toJSON()` already has these fields, and
-so do the features from
-[@gmod/gff-nostream](https://github.com/GMOD/gff-nostream).
+output; a JBrowse 2 feature's `feature.toJSON()` already has this shape, and so
+do the features from [@gmod/gff-nostream](https://github.com/GMOD/gff-nostream).
 
 ### With @gmod/gff-nostream
 

@@ -32,7 +32,7 @@ const { g2p, p2g, p2gCodon, refName, strand } =
 
 The function reads only the direct `subfeatures` of the feature you pass. A gene
 whose CDS sit under its mRNA children has no direct CDS, so for a gene the
-function returns empty maps and raises no error; pass each transcript instead.
+function returns empty maps without an error; pass each transcript instead.
 
 **Output.**
 
@@ -69,8 +69,8 @@ On a reverse-strand CDS `[0, 6)` the same codons become
 
 ## `getCodonRanges`
 
-`getCodonRanges` returns the genomic ranges that cover a codon, with more than
-one range when the codon spans an exon boundary.
+`getCodonRanges` returns the genomic ranges covering a codon, with more than one
+range when the codon spans an exon boundary.
 
 ```typescript
 import { getCodonRanges } from 'g2p_mapper'
