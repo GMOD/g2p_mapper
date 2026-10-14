@@ -31,8 +31,8 @@ const { g2p, p2g, p2gCodon, refName, strand } =
 | `subfeatures` | `Feat[]`         | optional; should contain the CDS children                     |
 
 The function reads only the direct `subfeatures` of the feature you pass. A gene
-whose CDS sit under its mRNA children has no direct CDS, so passing the gene
-returns empty maps without an error; pass each transcript instead.
+whose CDS sit under its mRNA children has no direct CDS, so for a gene the
+function returns empty maps and raises no error; pass each transcript instead.
 
 **Output.**
 
@@ -44,7 +44,8 @@ returns empty maps without an error; pass each transcript instead.
 | `refName`  | `string`                   | the parent's `refName`                                                        |
 | `strand`   | `1 \| -1`                  | the parent's `strand`                                                         |
 
-`p2gCodon` handles codons that span an exon boundary.
+For a codon that spans an exon boundary, `p2gCodon` lists the bases on both
+sides.
 
 ### Worked example
 
@@ -68,8 +69,8 @@ On a reverse-strand CDS `[0, 6)` the same codons become
 
 ## `getCodonRanges`
 
-The genomic ranges covering a codon. Returns more than one range when the codon
-spans an exon boundary.
+`getCodonRanges` returns the genomic ranges that cover a codon, with more than
+one range when the codon spans an exon boundary.
 
 ```typescript
 import { getCodonRanges } from 'g2p_mapper'
@@ -80,10 +81,11 @@ const ranges = getCodonRanges(p2gCodon, proteinPos)
 
 ## `getCodonRange`
 
-A faster single-range alternative, kept for backwards compatibility. Prefer
-`getCodonRanges` for new code: `getCodonRange` assumes the codon's three bases
-are contiguous, so it returns wrong ranges for codons that span an exon boundary
-and for split codons at a phase-shifted CDS start (`phase != 0`).
+`getCodonRange` is a faster single-range alternative, kept for backwards
+compatibility. Prefer `getCodonRanges` for new code: `getCodonRange` assumes the
+codon's three bases are contiguous, so it returns wrong ranges for codons that
+span an exon boundary and for split codons at a phase-shifted CDS start
+(`phase != 0`).
 
 ```typescript
 import { getCodonRange } from 'g2p_mapper'

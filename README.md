@@ -47,22 +47,23 @@ const feature = {
 
 - `refName`, `start` and `end` are required on every feature
 - `strand` is required on the transcript, and is `1` or `-1`, not `+` or `-`
-- Only subfeatures with `type: 'CDS'` count; exons, UTRs and the rest are
-  ignored, and the CDS can be in any order
+- The mapper reads only subfeatures with `type: 'CDS'`, in any order, and
+  ignores exons, UTRs and the rest
 - `phase` is the GFF3 phase column; the mapper reads it from the first CDS in
   transcription order only
 - Coordinates are 0-based and half-open, so a GFF3 `start` (1-based, inclusive)
   becomes `start - 1` and `end` stays the same
 
-`g2p_mapper` does not parse GFF3. Build the object from your parser's output; a
-JBrowse 2 feature's `feature.toJSON()` already has this shape, and so do the
-features from [@gmod/gff-nostream](https://github.com/GMOD/gff-nostream).
+`g2p_mapper` takes a parsed feature, so build the object from your GFF3 parser's
+output. A JBrowse 2 feature's `feature.toJSON()` already has these fields, and
+so do the features from
+[@gmod/gff-nostream](https://github.com/GMOD/gff-nostream).
 
 ### With @gmod/gff-nostream
 
 `@gmod/gff-nostream` returns features with 0-based coordinates, numeric strand
-and nested `subfeatures`, so its transcripts go to the mapper unchanged. The
-mapper wants the transcript, not the gene above it:
+and nested `subfeatures`, so its transcripts go to the mapper unchanged. Pass
+each transcript, not the gene above it:
 
 ```typescript
 import { parseStringSync } from '@gmod/gff-nostream'
@@ -112,7 +113,7 @@ Protein positions are 0-based too: `0` is the first amino acid.
 ### Reverse strand
 
 With `strand: -1` the mapper walks the CDS from the highest coordinate down, so
-the first amino acid sits at the right-hand end. The same transcript on the
+the first amino acid is at the right-hand end. The same transcript on the
 reverse strand has different phases, because the right-hand CDS now comes first:
 
 ```typescript
@@ -125,7 +126,7 @@ const { g2p, p2g, p2gCodon } = genomeToTranscriptSeqMapping({
   ],
 })
 
-g2p[204] // 0: the highest CDS base starts the protein
+g2p[204] // 0: the highest CDS base is in the first amino acid
 g2p[99] // 2
 
 p2g[1] // 201: the codon's first base, which is its highest coordinate
@@ -152,15 +153,16 @@ getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]: always ascending
 - [jbrowse-plugin-msaview](https://github.com/GMOD/jbrowse-plugin-msaview) —
   maps MSA sequence positions to the genome
 
-## Footnote
+## Assumptions
 
 `g2p_mapper` assumes simple 3-letter codon translation, which does not always
 hold. Validate this assumption against your own data.
 
 ## Publishing
 
-[Trusted publishing](https://docs.npmjs.com/about-trusted-publishing) via GitHub
-Actions.
+GitHub Actions publishes each version tag to npm with
+[trusted publishing](https://docs.npmjs.com/about-trusted-publishing). To
+release:
 
 ```bash
 pnpm version patch  # or minor/major
