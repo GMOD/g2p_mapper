@@ -126,7 +126,7 @@ const { g2p, p2g, p2gCodon } = genomeToTranscriptSeqMapping({
   ],
 })
 
-g2p[204] // 0: the highest CDS base is in the first amino acid
+g2p[204] // 0: the highest CDS base starts the protein
 g2p[99] // 2
 
 p2g[1] // 201: the codon's first base, which is its highest coordinate
