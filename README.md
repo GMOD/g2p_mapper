@@ -54,15 +54,12 @@ const feature = {
 - Coordinates are 0-based and half-open, so a GFF3 `start` (1-based, inclusive)
   becomes `start - 1` and `end` stays the same
 
-`g2p_mapper` takes a parsed feature, so build the object from your GFF3 parser's
-output; a JBrowse 2 feature's `feature.toJSON()` already has this shape, and so
-do the features from [@gmod/gff-nostream](https://github.com/GMOD/gff-nostream).
+A JBrowse 2 feature's `feature.toJSON()` already has this shape.
 
 ### With @gmod/gff-nostream
 
-`@gmod/gff-nostream` returns features with 0-based coordinates, numeric strand
-and nested `subfeatures`, so its transcripts go to the mapper unchanged. Pass
-each transcript, not the gene above it:
+[@gmod/gff-nostream](https://github.com/GMOD/gff-nostream) transcripts go to the
+mapper unchanged. Pass each transcript, not the gene above it:
 
 ```typescript
 import { parseStringSync } from '@gmod/gff-nostream'

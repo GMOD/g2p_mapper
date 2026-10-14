@@ -44,9 +44,6 @@ function returns empty maps without an error; pass each transcript instead.
 | `refName`  | `string`                   | the parent's `refName`                                                        |
 | `strand`   | `1 \| -1`                  | the parent's `strand`                                                         |
 
-For a codon that spans an exon boundary, `p2gCodon` lists the bases on both
-sides.
-
 ### Worked example
 
 ```typescript
@@ -63,9 +60,6 @@ const ret = genomeToTranscriptSeqMapping({
 // ret.p2g      => { 0: 0, 1: 3 }
 // ret.p2gCodon => { 0: [0, 1, 2], 1: [3, 4, 5] }
 ```
-
-On a reverse-strand CDS `[0, 6)` the same codons become
-`{ 0: [5, 4, 3], 1: [2, 1, 0] }`.
 
 ## `getCodonRanges`
 
