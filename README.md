@@ -156,7 +156,7 @@ getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]: always ascending
 ## Assumptions
 
 `g2p_mapper` assumes simple 3-letter codon translation, which does not always
-hold. Validate this assumption against your own data.
+hold, so validate the assumption against your own data.
 
 ## Publishing
 

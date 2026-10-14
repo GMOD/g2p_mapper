@@ -39,13 +39,13 @@ A codon that spans an exon boundary, or one at the start of a CDS with
 - `p2gCodon` holds all three positions.
 - `getCodonRanges` sorts them and merges adjacent bases, returning one range per
   contiguous piece.
-- `getCodonRange` assumes three contiguous bases and returns a range that
-  includes intronic or out-of-CDS positions for a split codon. The library keeps
-  it for backwards compatibility.
+- `getCodonRange`, which the library keeps for backwards compatibility, assumes
+  three contiguous bases and returns a range that includes intronic or
+  out-of-CDS positions for a split codon.
 
 ## Assumptions
 
-- Translation is simple 3-letter codons. The mapper does not model
-  selenocysteine recoding, ribosomal frameshifts or similar exceptions, so
-  validate against your own data.
+- The mapper translates simple 3-letter codons and does not model selenocysteine
+  recoding, ribosomal frameshifts or similar exceptions, so validate against
+  your own data.
 - All coordinates are 0-based and half-open.
