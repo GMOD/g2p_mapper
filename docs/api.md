@@ -73,13 +73,25 @@ import { getCodonRanges } from 'g2p_mapper'
 const ranges = getCodonRanges(p2gCodon, proteinPos)
 ```
 
+## `proteinRangeToGenome`
+
+`proteinRangeToGenome` places a run of protein positions, such as a Pfam domain
+or a UniProt feature, on the genome without building the per-base maps.
+
+```typescript
+import { proteinRangeToGenome } from 'g2p_mapper'
+
+// protein positions [proteinStart, proteinEnd), 0-based like the maps above;
+// one [start, end) per CDS part, sorted ascending, empty past the last codon
+const ranges = proteinRangeToGenome(transcript, proteinStart, proteinEnd)
+```
+
 ## `getCodonRange`
 
 `getCodonRange` is a faster single-range alternative, kept for backwards
 compatibility. Prefer `getCodonRanges` for new code: `getCodonRange` assumes the
 codon's three bases are contiguous, so it returns wrong ranges for codons that
-span an exon boundary and for split codons at a phase-shifted CDS start
-(`phase != 0`).
+span an exon boundary.
 
 ```typescript
 import { getCodonRange } from 'g2p_mapper'

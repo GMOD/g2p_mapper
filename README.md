@@ -103,6 +103,8 @@ getCodonRanges(p2gCodon, 2) // [[202, 205]]
   transcription order
 - `getCodonRanges` — a codon's genomic `[start, end)` ranges, one per contiguous
   piece, or `undefined` for a protein position outside the CDS
+- `proteinRangeToGenome(transcript, start, end)` — the genomic ranges encoding
+  protein positions `[start, end)`, such as a domain, one per CDS part
 
 Protein positions are 0-based too: `0` is the first amino acid.
 

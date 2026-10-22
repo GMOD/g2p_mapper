@@ -3,6 +3,7 @@ import {
   genomeToTranscriptSeqMapping,
   getCodonRange,
   getCodonRanges,
+  proteinRangeToGenome,
 } from '../src/index.ts'
 
 const codonTable: Record<string, string> = {
@@ -488,8 +489,7 @@ test('forward strand multi-exon CDS skips intronic positions', () => {
   expect(ret.g2p[5]).toBeUndefined()
 })
 
-test('forward strand with phase=1 on first CDS shifts protein positions', () => {
-  // Phase=1: first base of CDS is the last base of a codon begun upstream.
+test('the phase bases before the first complete codon map to no protein position', () => {
   const ret = genomeToTranscriptSeqMapping({
     refName: 'chr1',
     start: 0,
@@ -499,13 +499,40 @@ test('forward strand with phase=1 on first CDS shifts protein positions', () => 
       { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand: 1, phase: 1 },
     ],
   })
-  expect(ret.g2p[0]).toBe(0)
-  expect(ret.g2p[1]).toBe(1)
-  expect(ret.g2p[3]).toBe(1)
-  expect(ret.g2p[4]).toBe(2)
-  expect(ret.p2g[0]).toBe(0)
-  expect(ret.p2g[1]).toBe(1)
-  expect(ret.p2g[2]).toBe(4)
+  expect(ret.g2p[0]).toBeUndefined()
+  expect(ret.g2p[1]).toBe(0)
+  expect(ret.g2p[3]).toBe(0)
+  expect(ret.g2p[4]).toBe(1)
+  expect(ret.p2g[0]).toBe(1)
+  expect(ret.p2g[1]).toBe(4)
+  expect(ret.p2gCodon[0]).toEqual([1, 2, 3])
+})
+
+test('protein position 0 is the first amino acid of a phase-shifted translation', () => {
+  // the leading "G" completes a codon begun upstream; a translation such as
+  // gffread -y or an NCBI protein drops it and reads ATG GCC
+  const seq = 'GATGGCC'
+  for (const strand of [1, -1] as const) {
+    const genome = strand === 1 ? seq : reverseComplement(seq)
+    const { p2gCodon } = genomeToTranscriptSeqMapping({
+      refName: 'chr1',
+      start: 0,
+      end: 7,
+      strand,
+      subfeatures: [
+        { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand, phase: 1 },
+      ],
+    })
+    const residues = [0, 1].map(
+      p =>
+        codonTable[
+          p2gCodon[p]!.map(i =>
+            strand === 1 ? genome[i] : reverseComplement(genome[i]!),
+          ).join('')
+        ],
+    )
+    expect(residues).toEqual(['M', 'A'])
+  }
 })
 
 test('CDS with start >= end is filtered out', () => {
@@ -781,4 +808,41 @@ test('a gene has no direct CDS children, so its maps are empty', () => {
   }
   expect(genomeToTranscriptSeqMapping(gene).g2p).toEqual({})
   expect(genomeToTranscriptSeqMapping(transcript).g2p[200]).toBe(1)
+})
+
+test('proteinRangeToGenome gives a range per CDS part on either strand', () => {
+  expect(proteinRangeToGenome(readmeTranscript(1), 1, 3)).toEqual([
+    [102, 103],
+    [200, 205],
+  ])
+  const reverse = readmeTranscript(-1)
+  expect(proteinRangeToGenome(reverse, 0, 1)).toEqual([[202, 205]])
+  expect(proteinRangeToGenome(reverse, 1, 2)).toEqual([
+    [102, 103],
+    [200, 202],
+  ])
+  for (const strand of [1, -1] as const) {
+    const t = readmeTranscript(strand)
+    const { p2gCodon } = genomeToTranscriptSeqMapping(t)
+    expect(proteinRangeToGenome(t, 1, 2)).toEqual(getCodonRanges(p2gCodon, 1))
+  }
+})
+
+test('proteinRangeToGenome stops at the CDS end', () => {
+  const t = readmeTranscript(1)
+  expect(proteinRangeToGenome(t, 2, 10)).toEqual([[202, 205]])
+  expect(proteinRangeToGenome(t, 3, 10)).toEqual([])
+})
+
+test('proteinRangeToGenome skips the phase bases', () => {
+  const t = {
+    refName: 'chr1',
+    start: 0,
+    end: 7,
+    strand: 1,
+    subfeatures: [
+      { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand: 1, phase: 1 },
+    ],
+  }
+  expect(proteinRangeToGenome(t, 0, 1)).toEqual([[1, 4]])
 })

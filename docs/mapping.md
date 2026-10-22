@@ -17,12 +17,14 @@ The graph source is [`img/mapping.dot`](img/mapping.dot); regenerate with
    for each `start-end` pair.
 3. **Sort.** Ascending by `start` on the forward strand, descending on the
    reverse strand.
-4. **Seed the counter.** `(3 - phase) % 3`, where `phase` comes from the first
-   CDS only. Phase is the number of bases at the start of that CDS that complete
-   a codon begun outside this transcript.
-5. **Walk the bases.** Each base gets protein position `floor(counter / 3)`. The
-   function assumes the per-segment phases agree with running the counter
-   through every base.
+4. **Skip the phase bases.** `phase`, read from the first CDS only, counts the
+   bases at its start that complete a codon begun outside this transcript. A
+   translation of the CDS drops them, so they map to no protein position, and
+   position `0` is the first complete codon, as in `gffread -y` or an NCBI
+   protein FASTA.
+5. **Walk the bases.** Each remaining base gets protein position
+   `floor(counter / 3)`. The function assumes the per-segment phases agree with
+   running the counter through every base.
 
 ## Reverse strand
 
@@ -33,15 +35,15 @@ and `p2g` holds the highest coordinate of each codon.
 
 ## Codons that split
 
-A codon that spans an exon boundary, or one at the start of a CDS with
-`phase != 0`, has bases that are not contiguous in the genome.
+A codon that spans an exon boundary has bases that are not contiguous in the
+genome.
 
 - `p2gCodon` holds all three positions.
 - `getCodonRanges` sorts them and merges adjacent bases, returning one range per
   contiguous piece.
 - `getCodonRange`, which the library keeps for backwards compatibility, assumes
-  three contiguous bases and returns a range that includes intronic or
-  out-of-CDS positions for a split codon.
+  three contiguous bases and returns a range that includes intronic positions
+  for a split codon.
 
 ## Assumptions
 
