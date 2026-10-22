@@ -1,3 +1,14 @@
+## [2.3.0](https://github.com/GMOD/g2p_mapper/compare/v2.2.1...v2.3.0) (2026-10-22)
+
+### Other Changes
+
+- Rewrite AI-writing tropes in README and docs ([630936f](https://github.com/GMOD/g2p_mapper/commit/630936f7eb5ec749f44dbc2209b635890cb67ba8))
+- Restore claims changed by the tropes rewrite ([7fb8f0e](https://github.com/GMOD/g2p_mapper/commit/7fb8f0e9a5bea84daeaad155931784f9c077de7d))
+- Fold short verdict sentences into their neighbours ([0267321](https://github.com/GMOD/g2p_mapper/commit/0267321bedc562862ba5217ffbe1fa71aaae9c18))
+- Restore wording the tropes rewrite changed without a trope ([6672e7a](https://github.com/GMOD/g2p_mapper/commit/6672e7ae7156f7716f03cffe278c3260c54d78cd))
+- Trim repeated content from README and API docs ([a58377d](https://github.com/GMOD/g2p_mapper/commit/a58377d7e6181ae13eb757caef884ea32abf5309))
+- Map the phase bases before the first full codon to no residue; add proteinRangeToGenome ([b7e9152](https://github.com/GMOD/g2p_mapper/commit/b7e9152ef622ffd8b2379797c31db049e9f67af0))
+
 ## [2.2.1](https://github.com/GMOD/g2p_mapper/compare/v2.2.0...v2.2.1) (2026-10-11)
 
 ### Tests
