@@ -17,11 +17,11 @@ The graph source is [`img/mapping.dot`](img/mapping.dot); regenerate with
    for each `start-end` pair.
 3. **Sort.** Ascending by `start` on the forward strand, descending on the
    reverse strand.
-4. **Skip the phase bases.** `phase`, read from the first CDS only, counts the
-   bases at its start that complete a codon begun outside this transcript. A
-   translation of the CDS drops them, so they map to no protein position, and
-   position `0` is the first complete codon, as in `gffread -y` or an NCBI
-   protein FASTA.
+4. **Number the partial codon.** `phase`, read from the first CDS only, counts
+   the bases at its start that complete a codon begun outside this transcript.
+   By default those bases are protein position `0`, as a JBrowse translation
+   writes them (`&`). With `partialCodon: 'dropped'` they map to no position and
+   `0` is the first complete codon, as in `gffread -y` or an NCBI protein FASTA.
 5. **Walk the bases.** Each remaining base gets protein position
    `floor(counter / 3)`. The function assumes the per-segment phases agree with
    running the counter through every base.

@@ -106,7 +106,10 @@ getCodonRanges(p2gCodon, 2) // [[202, 205]]
 - `proteinRangeToGenome(transcript, start, end)` — the genomic ranges encoding
   protein positions `[start, end)`, such as a domain, one per CDS part
 
-Protein positions are 0-based too: `0` is the first amino acid.
+Protein positions are 0-based too: `0` is the first amino acid. On a transcript
+whose first CDS has phase 1 or 2, `0` is the partial codon, as in a JBrowse
+translation; pass `{ partialCodon: 'dropped' }` to either function to number
+from the first complete codon, as `gffread -y` and NCBI protein FASTA do.
 
 ### Reverse strand
 

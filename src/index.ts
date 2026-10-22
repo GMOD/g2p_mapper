@@ -11,10 +11,26 @@ export interface Feat {
 }
 
 /**
- * The transcript's CDS parts in transcription order, repeated rows dropped,
- * with the first part's phase: the bases before the first complete codon.
+ * How protein positions count a partial first codon, the `phase` bases a first
+ * CDS with phase 1 or 2 opens on:
+ *
+ * - `counted` (the default): position `0` is that partial codon, as in a
+ *   JBrowse translation, which writes it as `&`
+ * - `dropped`: position `0` is the first complete codon, as in `gffread -y`,
+ *   an NCBI or Ensembl protein FASTA, and the domain calls made on them
  */
-function codingParts(feature: Feat) {
+export type PartialCodon = 'counted' | 'dropped'
+
+export interface NumberingOptions {
+  partialCodon?: PartialCodon
+}
+
+/**
+ * The transcript's CDS parts in transcription order, repeated rows dropped,
+ * and the CDS offset of protein position 0's first base: negative when a
+ * counted partial codon starts before the CDS does.
+ */
+function codingParts(feature: Feat, partialCodon: PartialCodon = 'counted') {
   const strand = feature.strand
   const refName = feature.refName
 
@@ -38,26 +54,29 @@ function codingParts(feature: Feat) {
   const cds = [...uniqueCds.values()].sort(
     (a, b) => strand * (a.start - b.start),
   )
-  return { cds, strand, refName, phase: cds[0]?.phase ?? 0 }
+  const phase = cds[0]?.phase ?? 0
+  const lead = phase > 0 && partialCodon === 'counted' ? phase - 3 : phase
+  return { cds, strand, refName, lead }
 }
 
-export function genomeToTranscriptSeqMapping(feature: Feat) {
-  const { cds, strand, refName, phase } = codingParts(feature)
+export function genomeToTranscriptSeqMapping(
+  feature: Feat,
+  { partialCodon }: NumberingOptions = {},
+) {
+  const { cds, strand, refName, lead } = codingParts(feature, partialCodon)
 
   const g2p: Record<number, number> = {}
   const p2g: Record<number, number> = {}
   const p2gCodon: Record<number, number[]> = {}
 
-  // The `phase` bases before the first complete codon belong to a codon begun
-  // outside the transcript, which a translation of the CDS drops, so they map
-  // to no protein position.
+  // a dropped partial codon's bases map to no protein position
   let cdsPos = 0
   let lastProteinPos = -1
   for (const f of cds) {
     const length = f.end - f.start
     for (let i = 0; i < length; i++) {
       const genomePos = strand === 1 ? f.start + i : f.end - 1 - i
-      const codingPos = cdsPos++ - phase
+      const codingPos = cdsPos++ - lead
       if (codingPos < 0) {
         continue
       }
@@ -86,10 +105,11 @@ export function proteinRangeToGenome(
   feature: Feat,
   proteinStart: number,
   proteinEnd: number,
+  { partialCodon }: NumberingOptions = {},
 ) {
-  const { cds, strand, phase } = codingParts(feature)
-  const from = proteinStart * 3 + phase
-  const to = proteinEnd * 3 + phase
+  const { cds, strand, lead } = codingParts(feature, partialCodon)
+  const from = Math.max(0, proteinStart * 3 + lead)
+  const to = proteinEnd * 3 + lead
   const ranges: [number, number][] = []
   let offset = 0
   for (const f of cds) {

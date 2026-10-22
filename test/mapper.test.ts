@@ -489,16 +489,30 @@ test('forward strand multi-exon CDS skips intronic positions', () => {
   expect(ret.g2p[5]).toBeUndefined()
 })
 
-test('the phase bases before the first complete codon map to no protein position', () => {
-  const ret = genomeToTranscriptSeqMapping({
-    refName: 'chr1',
-    start: 0,
-    end: 7,
-    strand: 1,
-    subfeatures: [
-      { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand: 1, phase: 1 },
-    ],
-  })
+const phase1 = {
+  refName: 'chr1',
+  start: 0,
+  end: 7,
+  strand: 1,
+  subfeatures: [
+    { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand: 1, phase: 1 },
+  ],
+}
+
+test('a counted partial first codon is protein position 0', () => {
+  // Phase=1: first base of CDS is the last base of a codon begun upstream.
+  const ret = genomeToTranscriptSeqMapping(phase1)
+  expect(ret.g2p[0]).toBe(0)
+  expect(ret.g2p[1]).toBe(1)
+  expect(ret.g2p[3]).toBe(1)
+  expect(ret.g2p[4]).toBe(2)
+  expect(ret.p2g[0]).toBe(0)
+  expect(ret.p2g[1]).toBe(1)
+  expect(ret.p2g[2]).toBe(4)
+})
+
+test('a dropped partial first codon maps to no protein position', () => {
+  const ret = genomeToTranscriptSeqMapping(phase1, { partialCodon: 'dropped' })
   expect(ret.g2p[0]).toBeUndefined()
   expect(ret.g2p[1]).toBe(0)
   expect(ret.g2p[3]).toBe(0)
@@ -508,30 +522,35 @@ test('the phase bases before the first complete codon map to no protein position
   expect(ret.p2gCodon[0]).toEqual([1, 2, 3])
 })
 
-test('protein position 0 is the first amino acid of a phase-shifted translation', () => {
-  // the leading "G" completes a codon begun upstream; a translation such as
-  // gffread -y or an NCBI protein drops it and reads ATG GCC
+test('each numbering reads the translation it names', () => {
+  // the leading "G" completes a codon begun upstream: JBrowse translates
+  // "&MA", gffread -y and an NCBI protein "MA"
   const seq = 'GATGGCC'
   for (const strand of [1, -1] as const) {
     const genome = strand === 1 ? seq : reverseComplement(seq)
-    const { p2gCodon } = genomeToTranscriptSeqMapping({
-      refName: 'chr1',
-      start: 0,
-      end: 7,
+    const feature = {
+      ...phase1,
       strand,
       subfeatures: [
         { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand, phase: 1 },
       ],
-    })
-    const residues = [0, 1].map(
-      p =>
-        codonTable[
-          p2gCodon[p]!.map(i =>
-            strand === 1 ? genome[i] : reverseComplement(genome[i]!),
-          ).join('')
-        ],
-    )
-    expect(residues).toEqual(['M', 'A'])
+    }
+    const residues = (p2gCodon: Record<number, number[]>, ps: number[]) =>
+      ps.map(
+        p =>
+          codonTable[
+            p2gCodon[p]!.map(i =>
+              strand === 1 ? genome[i] : reverseComplement(genome[i]!),
+            ).join('')
+          ],
+      )
+    const counted = genomeToTranscriptSeqMapping(feature).p2gCodon
+    expect(counted[0]).toHaveLength(1)
+    expect(residues(counted, [1, 2])).toEqual(['M', 'A'])
+    const dropped = genomeToTranscriptSeqMapping(feature, {
+      partialCodon: 'dropped',
+    }).p2gCodon
+    expect(residues(dropped, [0, 1])).toEqual(['M', 'A'])
   }
 })
 
@@ -834,15 +853,16 @@ test('proteinRangeToGenome stops at the CDS end', () => {
   expect(proteinRangeToGenome(t, 3, 10)).toEqual([])
 })
 
-test('proteinRangeToGenome skips the phase bases', () => {
-  const t = {
-    refName: 'chr1',
-    start: 0,
-    end: 7,
-    strand: 1,
-    subfeatures: [
-      { refName: 'chr1', start: 0, end: 7, type: 'CDS', strand: 1, phase: 1 },
-    ],
+test('proteinRangeToGenome counts the partial first codon like the maps', () => {
+  expect(proteinRangeToGenome(phase1, 0, 1)).toEqual([[0, 1]])
+  expect(proteinRangeToGenome(phase1, 1, 2)).toEqual([[1, 4]])
+  expect(
+    proteinRangeToGenome(phase1, 0, 1, { partialCodon: 'dropped' }),
+  ).toEqual([[1, 4]])
+  for (const partialCodon of ['counted', 'dropped'] as const) {
+    const { p2gCodon } = genomeToTranscriptSeqMapping(phase1, { partialCodon })
+    expect(proteinRangeToGenome(phase1, 1, 2, { partialCodon })).toEqual(
+      getCodonRanges(p2gCodon, 1),
+    )
   }
-  expect(proteinRangeToGenome(t, 0, 1)).toEqual([[1, 4]])
 })

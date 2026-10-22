@@ -4,6 +4,7 @@ All coordinates are 0-based and half-open (`[start, end)`). For how the maps are
 built, see [mapping.md](mapping.md).
 
 - [`genomeToTranscriptSeqMapping`](#genometotranscriptseqmapping)
+- [`proteinRangeToGenome`](#proteinrangetogenome)
 - [`getCodonRanges`](#getcodonranges)
 - [`getCodonRange`](#getcodonrange)
 
@@ -29,6 +30,14 @@ const { g2p, p2g, p2gCodon, refName, strand } =
 | `strand`      | `number`         | `1` (forward) or `-1` (reverse); required on the parent       |
 | `phase`       | `number`         | optional CDS phase (0, 1, or 2), read from the first CDS only |
 | `subfeatures` | `Feat[]`         | optional; should contain the CDS children                     |
+
+**Options.** An optional second argument, of the exported type
+`NumberingOptions`, sets `partialCodon`, of the exported type `PartialCodon`:
+how protein positions count the partial codon a first CDS with phase 1 or 2
+opens on. `'counted'`, the default, makes it position `0`, as a JBrowse
+translation does; `'dropped'` starts at the first complete codon, as
+`gffread -y`, NCBI and Ensembl protein FASTA do, and so do domain calls made on
+them.
 
 The function reads only the direct `subfeatures` of the feature you pass. A gene
 whose CDS sit under its mRNA children has no direct CDS, so for a gene the
@@ -84,6 +93,11 @@ import { proteinRangeToGenome } from 'g2p_mapper'
 // protein positions [proteinStart, proteinEnd), 0-based like the maps above;
 // one [start, end) per CDS part, sorted ascending, empty past the last codon
 const ranges = proteinRangeToGenome(transcript, proteinStart, proteinEnd)
+
+// positions numbered as in a gffread or NCBI protein FASTA
+proteinRangeToGenome(transcript, proteinStart, proteinEnd, {
+  partialCodon: 'dropped',
+})
 ```
 
 ## `getCodonRange`
