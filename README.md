@@ -8,19 +8,8 @@ protein/transcript positions and back.
 - Handles CDS phase offsets
 - Deduplicates repeated CDS rows
 - Handles codons that span an exon boundary
-
-![Each CDS base numbered with its protein position](docs/img/codons.svg)
-
-The figure numbers each CDS base of the [example transcript](#the-input-feature)
-below, by running it through the mapper:
-
-- Each three bases in transcription order make one protein position, and
-  position 1 splits across the intron
-- On the reverse strand the walk starts at the highest base, so position 0 is on
-  the right
-- A first CDS with phase 1 opens on the last base of a codon begun upstream.
-  That base is position 0 by default, and no position with
-  `partialCodon: 'dropped'`
+- Pairs with [p2s_mapper](https://github.com/GMOD/p2s_mapper), which carries a
+  protein position on to a residue of a 3D structure: genome → protein → 3D
 
 ## Install
 
@@ -158,6 +147,8 @@ getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]: always ascending
 
 ## See also
 
+- [p2s_mapper](https://github.com/GMOD/p2s_mapper) — maps a protein position to
+  residue in a structure file, combines with this lib
 - [g2p_mapper_cli](https://github.com/cmdcolin/g2p_mapper_cli) — CLI wrapper for
   this library
 - [interproscan2genome](https://github.com/cmdcolin/interproscan2genome) — maps

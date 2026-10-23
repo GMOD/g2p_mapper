@@ -82,32 +82,13 @@ const CELL = 40
 const INTRON = 100
 const SANS = 'Helvetica,Arial,sans-serif'
 const MONO = 'ui-monospace,SFMono-Regular,Menlo,Consolas,monospace'
-const INK = '#1f2328'
-const MUTED = '#57606a'
-const LINE = '#8c959f'
-const PALETTE = [
-  { stroke: '#0969da', fill: '#ddf4ff' },
-  { stroke: '#bc4c00', fill: '#ffe2c8' },
-  { stroke: '#8250df', fill: '#fbefff' },
-  { stroke: '#1a7f37', fill: '#dafbe1' },
-]
-const UNNUMBERED = { stroke: LINE, fill: '#f6f8fa' }
+const INK = '#000000'
+const MUTED = '#666666'
 
 const DARK: Record<string, string> = {
   '#ffffff': '#0d1117',
-  '#1f2328': '#e6edf3',
-  '#57606a': '#9198a1',
-  '#8c959f': '#656c76',
-  '#d0d7de': '#30363d',
-  '#f6f8fa': '#151b23',
-  '#0969da': '#4493f8',
-  '#ddf4ff': '#0f2a47',
-  '#bc4c00': '#f0883e',
-  '#ffe2c8': '#3d2414',
-  '#8250df': '#ab7df8',
-  '#fbefff': '#2b1d45',
-  '#1a7f37': '#3fb950',
-  '#dafbe1': '#12301d',
+  '#000000': '#e6edf3',
+  '#666666': '#9198a1',
 }
 
 const darkStyle = () =>
@@ -190,11 +171,6 @@ function drawPanel(
 ) {
   const { exons, xOf, right } = layout(panel.feature)
   const bases = [...xOf.keys()]
-  const first = panel.numberings[0]!.g2p
-  const color = (base: number) => {
-    const pos = first[base]
-    return pos === undefined ? UNNUMBERED : PALETTE[pos % PALETTE.length]!
-  }
   const out: string[] = [
     text(16, top + 12, panel.title, { size: 13, anchor: 'start', bold: true }),
     text(16 + panel.title.length * 8 + 10, top + 12, panel.sub, {
@@ -226,7 +202,7 @@ function drawPanel(
   for (let i = 1; i < exons.length; i++) {
     const gapStart = xOf.get(exons[i - 1]!.end - 1)! + CELL
     out.push(
-      `<line x1="${gapStart + 4}" y1="${cellY + 14}" x2="${gapStart + INTRON - 4}" y2="${cellY + 14}" stroke="${LINE}" stroke-dasharray="3 3"/>`,
+      `<line x1="${gapStart + 4}" y1="${cellY + 14}" x2="${gapStart + INTRON - 4}" y2="${cellY + 14}" stroke="${MUTED}" stroke-dasharray="3 3"/>`,
       text(gapStart + INTRON / 2, cellY + 8, 'intron', {
         size: 10,
         fill: MUTED,
@@ -234,10 +210,8 @@ function drawPanel(
     )
   }
   for (const base of bases) {
-    const c = color(base)
-    const dash = c === UNNUMBERED ? ' stroke-dasharray="2 2"' : ''
     out.push(
-      `<rect x="${xOf.get(base)! + 1}" y="${cellY}" width="${CELL - 2}" height="28" rx="3" fill="${c.fill}" stroke="${c.stroke}"${dash}/>`,
+      `<rect x="${xOf.get(base)! + 1}" y="${cellY}" width="${CELL - 2}" height="28" fill="#ffffff" stroke="${INK}"/>`,
       text(xOf.get(base)! + CELL / 2, cellY + 18, base, {
         size: 11,
         font: MONO,
@@ -257,25 +231,22 @@ function drawPanel(
     )
     const pieces = codonPieces(g2p, bases)
     pieces.forEach((piece, i) => {
-      const stroke = color(piece.from).stroke
       const pa = xOf.get(piece.from)! + 3
       const pb = xOf.get(piece.to)! + CELL - 3
       out.push(
-        `<path d="M${pa} ${y - 6} V${y} H${pb} V${y - 6}" fill="none" stroke="${stroke}" stroke-width="1.5"/>`,
+        `<path d="M${pa} ${y - 6} V${y} H${pb} V${y - 6}" fill="none" stroke="${INK}"/>`,
         text((pa + pb) / 2, y + 13, piece.pos, {
           size: 11,
-          fill: stroke,
           font: MONO,
-          bold: true,
         }),
       )
       const next = pieces[i + 1]
       if (next?.pos === piece.pos) {
         out.push(
-          `<line x1="${pb}" y1="${y}" x2="${xOf.get(next.from)! + 3}" y2="${y}" stroke="${stroke}" stroke-width="1.5" stroke-dasharray="3 3"/>`,
+          `<line x1="${pb}" y1="${y}" x2="${xOf.get(next.from)! + 3}" y2="${y}" stroke="${INK}" stroke-dasharray="3 3"/>`,
           text(pb + INTRON / 2 + 3, y + 13, 'split codon', {
             size: 10,
-            fill: stroke,
+            fill: MUTED,
           }),
         )
       }
@@ -311,12 +282,7 @@ export function renderCodonFigure() {
   const width = readoutX + 290
   const body: string[] = []
   let top = 12
-  all.forEach((panel, i) => {
-    if (i > 0) {
-      body.push(
-        `<line x1="16" y1="${top - 10}" x2="${width - 16}" y2="${top - 10}" stroke="#d0d7de"/>`,
-      )
-    }
+  all.forEach(panel => {
     const { out, height } = drawPanel(panel, top, readoutX)
     body.push(...out)
     top += height + 20

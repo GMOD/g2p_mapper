@@ -1,132 +1,130 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 962 398" width="962" height="398" role="img" aria-label="Each CDS base numbered with its protein position, on the forward strand, the reverse strand and with phase 1">
-<style>@media (prefers-color-scheme: dark) {[fill="#ffffff"]{fill:#0d1117}[stroke="#ffffff"]{stroke:#0d1117}[fill="#1f2328"]{fill:#e6edf3}[stroke="#1f2328"]{stroke:#e6edf3}[fill="#57606a"]{fill:#9198a1}[stroke="#57606a"]{stroke:#9198a1}[fill="#8c959f"]{fill:#656c76}[stroke="#8c959f"]{stroke:#656c76}[fill="#d0d7de"]{fill:#30363d}[stroke="#d0d7de"]{stroke:#30363d}[fill="#f6f8fa"]{fill:#151b23}[stroke="#f6f8fa"]{stroke:#151b23}[fill="#0969da"]{fill:#4493f8}[stroke="#0969da"]{stroke:#4493f8}[fill="#ddf4ff"]{fill:#0f2a47}[stroke="#ddf4ff"]{stroke:#0f2a47}[fill="#bc4c00"]{fill:#f0883e}[stroke="#bc4c00"]{stroke:#f0883e}[fill="#ffe2c8"]{fill:#3d2414}[stroke="#ffe2c8"]{stroke:#3d2414}[fill="#8250df"]{fill:#ab7df8}[stroke="#8250df"]{stroke:#ab7df8}[fill="#fbefff"]{fill:#2b1d45}[stroke="#fbefff"]{stroke:#2b1d45}[fill="#1a7f37"]{fill:#3fb950}[stroke="#1a7f37"]{stroke:#3fb950}[fill="#dafbe1"]{fill:#12301d}[stroke="#dafbe1"]{stroke:#12301d}}</style>
+<style>@media (prefers-color-scheme: dark) {[fill="#ffffff"]{fill:#0d1117}[stroke="#ffffff"]{stroke:#0d1117}[fill="#000000"]{fill:#e6edf3}[stroke="#000000"]{stroke:#e6edf3}[fill="#666666"]{fill:#9198a1}[stroke="#666666"]{stroke:#9198a1}}</style>
 <rect width="962" height="398" fill="#ffffff"/>
-<text x="16" y="24" font-family="Helvetica,Arial,sans-serif" font-size="13" fill="#1f2328" text-anchor="start" font-weight="bold">Forward strand</text>
-<text x="138" y="24" font-family="Helvetica,Arial,sans-serif" font-size="10.5" fill="#57606a" text-anchor="start">strand: 1, first CDS phase 0</text>
-<line x1="180" y1="42" x2="634" y2="42" stroke="#57606a"/>
-<path d="M640 42 l-7 -4 v8 z" fill="#57606a"/>
-<text x="168" y="46" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">transcription order</text>
-<text x="168" y="72" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">genome position</text>
-<line x1="344" y1="68" x2="436" y2="68" stroke="#8c959f" stroke-dasharray="3 3"/>
-<text x="390" y="62" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="middle">intron</text>
-<rect x="181" y="54" width="38" height="28" rx="3" fill="#ddf4ff" stroke="#0969da"/>
-<text x="200" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">99</text>
-<rect x="221" y="54" width="38" height="28" rx="3" fill="#ddf4ff" stroke="#0969da"/>
-<text x="240" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">100</text>
-<rect x="261" y="54" width="38" height="28" rx="3" fill="#ddf4ff" stroke="#0969da"/>
-<text x="280" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">101</text>
-<rect x="301" y="54" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="320" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">102</text>
-<rect x="441" y="54" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="460" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">200</text>
-<rect x="481" y="54" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="500" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">201</text>
-<rect x="521" y="54" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="540" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">202</text>
-<rect x="561" y="54" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="580" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">203</text>
-<rect x="601" y="54" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="620" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">204</text>
-<text x="168" y="102" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">protein position</text>
-<path d="M183 88 V94 H297 V88" fill="none" stroke="#0969da" stroke-width="1.5"/>
-<text x="240" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#0969da" text-anchor="middle" font-weight="bold">0</text>
-<path d="M303 88 V94 H337 V88" fill="none" stroke="#bc4c00" stroke-width="1.5"/>
-<text x="320" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#bc4c00" text-anchor="middle" font-weight="bold">1</text>
-<line x1="337" y1="94" x2="443" y2="94" stroke="#bc4c00" stroke-width="1.5" stroke-dasharray="3 3"/>
-<text x="390" y="107" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#bc4c00" text-anchor="middle">split codon</text>
-<path d="M443 88 V94 H517 V88" fill="none" stroke="#bc4c00" stroke-width="1.5"/>
-<text x="480" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#bc4c00" text-anchor="middle" font-weight="bold">1</text>
-<path d="M523 88 V94 H637 V88" fill="none" stroke="#8250df" stroke-width="1.5"/>
-<text x="580" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#8250df" text-anchor="middle" font-weight="bold">2</text>
-<text x="672" y="58" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">g2p[200] = 1</text>
-<text x="672" y="74" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">p2gCodon[1] = [102, 200, 201]</text>
-<text x="672" y="90" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">getCodonRanges(p2gCodon, 1) =</text>
-<text x="672" y="106" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">[[102, 103], [200, 202]]</text>
-<line x1="16" y1="126" x2="946" y2="126" stroke="#d0d7de"/>
-<text x="16" y="148" font-family="Helvetica,Arial,sans-serif" font-size="13" fill="#1f2328" text-anchor="start" font-weight="bold">Reverse strand</text>
-<text x="138" y="148" font-family="Helvetica,Arial,sans-serif" font-size="10.5" fill="#57606a" text-anchor="start">strand: -1, first CDS (the right one) phase 0</text>
-<line x1="640" y1="166" x2="186" y2="166" stroke="#57606a"/>
-<path d="M180 166 l7 -4 v8 z" fill="#57606a"/>
-<text x="168" y="170" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">transcription order</text>
-<text x="168" y="196" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">genome position</text>
-<line x1="344" y1="192" x2="436" y2="192" stroke="#8c959f" stroke-dasharray="3 3"/>
-<text x="390" y="186" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="middle">intron</text>
-<rect x="181" y="178" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="200" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">99</text>
-<rect x="221" y="178" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="240" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">100</text>
-<rect x="261" y="178" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="280" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">101</text>
-<rect x="301" y="178" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="320" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">102</text>
-<rect x="441" y="178" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="460" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">200</text>
-<rect x="481" y="178" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="500" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">201</text>
-<rect x="521" y="178" width="38" height="28" rx="3" fill="#ddf4ff" stroke="#0969da"/>
-<text x="540" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">202</text>
-<rect x="561" y="178" width="38" height="28" rx="3" fill="#ddf4ff" stroke="#0969da"/>
-<text x="580" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">203</text>
-<rect x="601" y="178" width="38" height="28" rx="3" fill="#ddf4ff" stroke="#0969da"/>
-<text x="620" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">204</text>
-<text x="168" y="226" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">protein position</text>
-<path d="M183 212 V218 H297 V212" fill="none" stroke="#8250df" stroke-width="1.5"/>
-<text x="240" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#8250df" text-anchor="middle" font-weight="bold">2</text>
-<path d="M303 212 V218 H337 V212" fill="none" stroke="#bc4c00" stroke-width="1.5"/>
-<text x="320" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#bc4c00" text-anchor="middle" font-weight="bold">1</text>
-<line x1="337" y1="218" x2="443" y2="218" stroke="#bc4c00" stroke-width="1.5" stroke-dasharray="3 3"/>
-<text x="390" y="231" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#bc4c00" text-anchor="middle">split codon</text>
-<path d="M443 212 V218 H517 V212" fill="none" stroke="#bc4c00" stroke-width="1.5"/>
-<text x="480" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#bc4c00" text-anchor="middle" font-weight="bold">1</text>
-<path d="M523 212 V218 H637 V212" fill="none" stroke="#0969da" stroke-width="1.5"/>
-<text x="580" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#0969da" text-anchor="middle" font-weight="bold">0</text>
-<text x="672" y="182" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">g2p[204] = 0</text>
-<text x="672" y="198" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">p2g[1] = 201</text>
-<text x="672" y="214" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">p2gCodon[1] = [201, 200, 102]</text>
-<line x1="16" y1="250" x2="946" y2="250" stroke="#d0d7de"/>
-<text x="16" y="272" font-family="Helvetica,Arial,sans-serif" font-size="13" fill="#1f2328" text-anchor="start" font-weight="bold">Phase 1</text>
-<text x="82" y="272" font-family="Helvetica,Arial,sans-serif" font-size="10.5" fill="#57606a" text-anchor="start">strand: 1, first CDS phase 1: base 99 ends a codon begun upstream</text>
-<line x1="180" y1="290" x2="634" y2="290" stroke="#57606a"/>
-<path d="M640 290 l-7 -4 v8 z" fill="#57606a"/>
-<text x="168" y="294" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">transcription order</text>
-<text x="168" y="320" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="end">genome position</text>
-<line x1="344" y1="316" x2="436" y2="316" stroke="#8c959f" stroke-dasharray="3 3"/>
-<text x="390" y="310" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="middle">intron</text>
-<rect x="181" y="302" width="38" height="28" rx="3" fill="#ddf4ff" stroke="#0969da"/>
-<text x="200" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">99</text>
-<rect x="221" y="302" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="240" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">100</text>
-<rect x="261" y="302" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="280" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">101</text>
-<rect x="301" y="302" width="38" height="28" rx="3" fill="#ffe2c8" stroke="#bc4c00"/>
-<text x="320" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">102</text>
-<rect x="441" y="302" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="460" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">200</text>
-<rect x="481" y="302" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="500" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">201</text>
-<rect x="521" y="302" width="38" height="28" rx="3" fill="#fbefff" stroke="#8250df"/>
-<text x="540" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">202</text>
-<rect x="561" y="302" width="38" height="28" rx="3" fill="#dafbe1" stroke="#1a7f37"/>
-<text x="580" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">203</text>
-<rect x="601" y="302" width="38" height="28" rx="3" fill="#dafbe1" stroke="#1a7f37"/>
-<text x="620" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1f2328" text-anchor="middle">204</text>
-<text x="168" y="350" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#57606a" text-anchor="end">counted (default)</text>
-<path d="M183 336 V342 H217 V336" fill="none" stroke="#0969da" stroke-width="1.5"/>
-<text x="200" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#0969da" text-anchor="middle" font-weight="bold">0</text>
-<path d="M223 336 V342 H337 V336" fill="none" stroke="#bc4c00" stroke-width="1.5"/>
-<text x="280" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#bc4c00" text-anchor="middle" font-weight="bold">1</text>
-<path d="M443 336 V342 H557 V336" fill="none" stroke="#8250df" stroke-width="1.5"/>
-<text x="500" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#8250df" text-anchor="middle" font-weight="bold">2</text>
-<path d="M563 336 V342 H637 V336" fill="none" stroke="#1a7f37" stroke-width="1.5"/>
-<text x="600" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1a7f37" text-anchor="middle" font-weight="bold">3</text>
-<text x="168" y="380" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#57606a" text-anchor="end">dropped</text>
-<path d="M223 366 V372 H337 V366" fill="none" stroke="#bc4c00" stroke-width="1.5"/>
-<text x="280" y="385" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#bc4c00" text-anchor="middle" font-weight="bold">0</text>
-<path d="M443 366 V372 H557 V366" fill="none" stroke="#8250df" stroke-width="1.5"/>
-<text x="500" y="385" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#8250df" text-anchor="middle" font-weight="bold">1</text>
-<path d="M563 366 V372 H637 V366" fill="none" stroke="#1a7f37" stroke-width="1.5"/>
-<text x="600" y="385" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#1a7f37" text-anchor="middle" font-weight="bold">2</text>
-<text x="200" y="380" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#57606a" text-anchor="middle">none</text>
-<text x="672" y="306" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">counted: g2p[100] = 1</text>
-<text x="672" y="322" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#1f2328" text-anchor="start">dropped: g2p[100] = 0</text>
+<text x="16" y="24" font-family="Helvetica,Arial,sans-serif" font-size="13" fill="#000000" text-anchor="start" font-weight="bold">Forward strand</text>
+<text x="138" y="24" font-family="Helvetica,Arial,sans-serif" font-size="10.5" fill="#666666" text-anchor="start">strand: 1, first CDS phase 0</text>
+<line x1="180" y1="42" x2="634" y2="42" stroke="#666666"/>
+<path d="M640 42 l-7 -4 v8 z" fill="#666666"/>
+<text x="168" y="46" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">transcription order</text>
+<text x="168" y="72" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">genome position</text>
+<line x1="344" y1="68" x2="436" y2="68" stroke="#666666" stroke-dasharray="3 3"/>
+<text x="390" y="62" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="middle">intron</text>
+<rect x="181" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="200" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">99</text>
+<rect x="221" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="240" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">100</text>
+<rect x="261" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="280" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">101</text>
+<rect x="301" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="320" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">102</text>
+<rect x="441" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="460" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">200</text>
+<rect x="481" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="500" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">201</text>
+<rect x="521" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="540" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">202</text>
+<rect x="561" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="580" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">203</text>
+<rect x="601" y="54" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="620" y="72" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">204</text>
+<text x="168" y="102" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">protein position</text>
+<path d="M183 88 V94 H297 V88" fill="none" stroke="#000000"/>
+<text x="240" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">0</text>
+<path d="M303 88 V94 H337 V88" fill="none" stroke="#000000"/>
+<text x="320" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">1</text>
+<line x1="337" y1="94" x2="443" y2="94" stroke="#000000" stroke-dasharray="3 3"/>
+<text x="390" y="107" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="middle">split codon</text>
+<path d="M443 88 V94 H517 V88" fill="none" stroke="#000000"/>
+<text x="480" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">1</text>
+<path d="M523 88 V94 H637 V88" fill="none" stroke="#000000"/>
+<text x="580" y="107" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">2</text>
+<text x="672" y="58" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">g2p[200] = 1</text>
+<text x="672" y="74" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">p2gCodon[1] = [102, 200, 201]</text>
+<text x="672" y="90" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">getCodonRanges(p2gCodon, 1) =</text>
+<text x="672" y="106" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">[[102, 103], [200, 202]]</text>
+<text x="16" y="148" font-family="Helvetica,Arial,sans-serif" font-size="13" fill="#000000" text-anchor="start" font-weight="bold">Reverse strand</text>
+<text x="138" y="148" font-family="Helvetica,Arial,sans-serif" font-size="10.5" fill="#666666" text-anchor="start">strand: -1, first CDS (the right one) phase 0</text>
+<line x1="640" y1="166" x2="186" y2="166" stroke="#666666"/>
+<path d="M180 166 l7 -4 v8 z" fill="#666666"/>
+<text x="168" y="170" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">transcription order</text>
+<text x="168" y="196" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">genome position</text>
+<line x1="344" y1="192" x2="436" y2="192" stroke="#666666" stroke-dasharray="3 3"/>
+<text x="390" y="186" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="middle">intron</text>
+<rect x="181" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="200" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">99</text>
+<rect x="221" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="240" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">100</text>
+<rect x="261" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="280" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">101</text>
+<rect x="301" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="320" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">102</text>
+<rect x="441" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="460" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">200</text>
+<rect x="481" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="500" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">201</text>
+<rect x="521" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="540" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">202</text>
+<rect x="561" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="580" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">203</text>
+<rect x="601" y="178" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="620" y="196" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">204</text>
+<text x="168" y="226" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">protein position</text>
+<path d="M183 212 V218 H297 V212" fill="none" stroke="#000000"/>
+<text x="240" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">2</text>
+<path d="M303 212 V218 H337 V212" fill="none" stroke="#000000"/>
+<text x="320" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">1</text>
+<line x1="337" y1="218" x2="443" y2="218" stroke="#000000" stroke-dasharray="3 3"/>
+<text x="390" y="231" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="middle">split codon</text>
+<path d="M443 212 V218 H517 V212" fill="none" stroke="#000000"/>
+<text x="480" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">1</text>
+<path d="M523 212 V218 H637 V212" fill="none" stroke="#000000"/>
+<text x="580" y="231" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">0</text>
+<text x="672" y="182" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">g2p[204] = 0</text>
+<text x="672" y="198" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">p2g[1] = 201</text>
+<text x="672" y="214" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">p2gCodon[1] = [201, 200, 102]</text>
+<text x="16" y="272" font-family="Helvetica,Arial,sans-serif" font-size="13" fill="#000000" text-anchor="start" font-weight="bold">Phase 1</text>
+<text x="82" y="272" font-family="Helvetica,Arial,sans-serif" font-size="10.5" fill="#666666" text-anchor="start">strand: 1, first CDS phase 1: base 99 ends a codon begun upstream</text>
+<line x1="180" y1="290" x2="634" y2="290" stroke="#666666"/>
+<path d="M640 290 l-7 -4 v8 z" fill="#666666"/>
+<text x="168" y="294" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">transcription order</text>
+<text x="168" y="320" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="end">genome position</text>
+<line x1="344" y1="316" x2="436" y2="316" stroke="#666666" stroke-dasharray="3 3"/>
+<text x="390" y="310" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="middle">intron</text>
+<rect x="181" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="200" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">99</text>
+<rect x="221" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="240" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">100</text>
+<rect x="261" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="280" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">101</text>
+<rect x="301" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="320" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">102</text>
+<rect x="441" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="460" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">200</text>
+<rect x="481" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="500" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">201</text>
+<rect x="521" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="540" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">202</text>
+<rect x="561" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="580" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">203</text>
+<rect x="601" y="302" width="38" height="28" fill="#ffffff" stroke="#000000"/>
+<text x="620" y="320" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">204</text>
+<text x="168" y="350" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#666666" text-anchor="end">counted (default)</text>
+<path d="M183 336 V342 H217 V336" fill="none" stroke="#000000"/>
+<text x="200" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">0</text>
+<path d="M223 336 V342 H337 V336" fill="none" stroke="#000000"/>
+<text x="280" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">1</text>
+<path d="M443 336 V342 H557 V336" fill="none" stroke="#000000"/>
+<text x="500" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">2</text>
+<path d="M563 336 V342 H637 V336" fill="none" stroke="#000000"/>
+<text x="600" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">3</text>
+<text x="168" y="380" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#666666" text-anchor="end">dropped</text>
+<path d="M223 366 V372 H337 V366" fill="none" stroke="#000000"/>
+<text x="280" y="385" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">0</text>
+<path d="M443 366 V372 H557 V366" fill="none" stroke="#000000"/>
+<text x="500" y="385" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">1</text>
+<path d="M563 366 V372 H637 V366" fill="none" stroke="#000000"/>
+<text x="600" y="385" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#000000" text-anchor="middle">2</text>
+<text x="200" y="380" font-family="Helvetica,Arial,sans-serif" font-size="10" fill="#666666" text-anchor="middle">none</text>
+<text x="672" y="306" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">counted: g2p[100] = 1</text>
+<text x="672" y="322" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#000000" text-anchor="start">dropped: g2p[100] = 0</text>
 </svg>
