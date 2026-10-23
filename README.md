@@ -151,8 +151,8 @@ getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]: always ascending
 
 ## Docs
 
-- [mapping.md](docs/mapping.md) — how the maps are built, with a flowchart, and
-  how reverse strands and split codons behave
+- [mapping.md](docs/mapping.md) — how the maps are built, and how reverse
+  strands and split codons behave
 - [api.md](docs/api.md) — the `Feat` input, the return maps, and a worked
   example
 
@@ -162,8 +162,8 @@ getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]: always ascending
   this library
 - [interproscan2genome](https://github.com/cmdcolin/interproscan2genome) — maps
   InterProScan protein annotations back to genome coordinates
-- [jbrowse-plugin-protein3d](https://github.com/cmdcolin/jbrowse-plugin-protein3d)
-  — maps 3-D protein structure positions to the genome
+- [jbrowse-plugin-protein3d](https://github.com/GMOD/jbrowse-plugin-protein3d) —
+  maps 3-D protein structure positions to the genome
 - [jbrowse-plugin-msaview](https://github.com/GMOD/jbrowse-plugin-msaview) —
   maps MSA sequence positions to the genome
 

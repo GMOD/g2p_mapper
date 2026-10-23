@@ -3,10 +3,7 @@
 `genomeToTranscriptSeqMapping` walks a transcript's CDS bases in transcription
 order and numbers them in groups of three.
 
-![From a transcript feature to the position maps](img/mapping.svg)
-
-The graph source is [`img/mapping.dot`](img/mapping.dot); regenerate with
-`dot -Tsvg docs/img/mapping.dot -o docs/img/mapping.svg`.
+![Each CDS base numbered with its protein position](img/codons.svg)
 
 ## Steps
 

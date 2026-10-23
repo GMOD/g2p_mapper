@@ -93,6 +93,28 @@ const PALETTE = [
 ]
 const UNNUMBERED = { stroke: LINE, fill: '#f6f8fa' }
 
+const DARK: Record<string, string> = {
+  '#ffffff': '#0d1117',
+  '#1f2328': '#e6edf3',
+  '#57606a': '#9198a1',
+  '#8c959f': '#656c76',
+  '#d0d7de': '#30363d',
+  '#f6f8fa': '#151b23',
+  '#0969da': '#4493f8',
+  '#ddf4ff': '#0f2a47',
+  '#bc4c00': '#f0883e',
+  '#ffe2c8': '#3d2414',
+  '#8250df': '#ab7df8',
+  '#fbefff': '#2b1d45',
+  '#1a7f37': '#3fb950',
+  '#dafbe1': '#12301d',
+}
+
+const darkStyle = () =>
+  `<style>@media (prefers-color-scheme: dark) {${Object.entries(DARK)
+    .map(([l, d]) => `[fill="${l}"]{fill:${d}}[stroke="${l}"]{stroke:${d}}`)
+    .join('')}}</style>`
+
 interface TextOpts {
   size?: number
   fill?: string
@@ -302,6 +324,7 @@ export function renderCodonFigure() {
   const height = top - 16
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" aria-label="Each CDS base numbered with its protein position, on the forward strand, the reverse strand and with phase 1">`,
+    darkStyle(),
     `<rect width="${width}" height="${height}" fill="#ffffff"/>`,
     ...body,
     '</svg>',
