@@ -9,6 +9,19 @@ protein/transcript positions and back.
 - Deduplicates repeated CDS rows
 - Handles codons that span an exon boundary
 
+![Each CDS base numbered with its protein position](docs/img/codons.svg)
+
+The figure numbers each CDS base of the [example transcript](#the-input-feature)
+below, by running it through the mapper:
+
+- Each three bases in transcription order make one protein position, and
+  position 1 splits across the intron
+- On the reverse strand the walk starts at the highest base, so position 0 is on
+  the right
+- A first CDS with phase 1 opens on the last base of a codon begun upstream.
+  That base is position 0 by default, and no position with
+  `partialCodon: 'dropped'`
+
 ## Install
 
 ```
