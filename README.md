@@ -151,7 +151,7 @@ getCodonRanges(p2gCodon, 1) // [[102, 103], [200, 202]]: always ascending
   residue in a structure file, combines with this lib
 - [g2p_mapper_cli](https://github.com/cmdcolin/g2p_mapper_cli) — CLI wrapper for
   this library
-- [domains2genome](https://github.com/cmdcolin/domains2genome) — places
+- [domains2genome](https://github.com/GMOD/domains2genome) — places
   InterProScan or HMMER domain calls on the genome as BED12
 - [jbrowse-plugin-protein3d](https://github.com/GMOD/jbrowse-plugin-protein3d) —
   maps 3-D protein structure positions to the genome
